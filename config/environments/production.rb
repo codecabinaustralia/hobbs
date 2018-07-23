@@ -93,6 +93,22 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+
+    #Devise
+    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+    #Email
+    config.action_mailer.delivery_method = :smtp
+    ActionMailer::Base.smtp_settings = {
+    :user_name => ENV["SENDGRID_USER"],
+    :password => ENV["SENDGRID_PASS"],
+    :domain => 'localhost:3000',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+  
   #Paperclip and AWS
 
   config.paperclip_defaults = {
