@@ -6,10 +6,12 @@ class ApplicationController < ActionController::Base
 	def company_profile
 		@company_profile = CompanySetting.first
 		
-		if @company_profile.category_based == true
-			@category_based = true
-		else
-			@category_based = false
+		if @company_profile.present?
+			if @company_profile.category_based == true
+				@category_based = true
+			else
+				@category_based = false
+			end
 		end
 	end
 
