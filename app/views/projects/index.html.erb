@@ -8,7 +8,6 @@
   <thead>
     <tr>
       <th>Category</th>
-      <th>Client</th>
       <th>Title</th>
       <th>Address</th>
       <th>City</th>
@@ -22,7 +21,6 @@
     <% @projects.each do |project| %>
       <tr>
         <td><%= project.category.title %></td>
-        <td><%= project.client.full_name %></td>
         <td><%= project.title %></td>
         <td><%= project.address %></td>
         <td><%= project.city %></td>
