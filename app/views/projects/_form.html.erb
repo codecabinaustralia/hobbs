@@ -8,13 +8,6 @@
   </div>
 
   <div class="field">
-    <%= form.label :client_id %>
-    <%= form.collection_select(:client_id, Client.all,
-                  :id, :full_name,
-                 {:prompt => 'Select a client'})%>
-  </div>
-
-  <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>

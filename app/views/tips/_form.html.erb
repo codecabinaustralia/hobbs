@@ -18,7 +18,9 @@
 
   <div class="field">
     <%= form.label :item_group_id %>
-    <%= form.text_field :item_group_id %>
+    <%= form.collection_select(:item_group_id, ItemGroup.all,
+                  :id, :title,
+                 {:prompt => 'Select an item group'})%>
   </div>
 
   <div class="actions">

@@ -1,6 +1,5 @@
 class Project < ApplicationRecord
   belongs_to :category
-  belongs_to :client
   has_many :zones
   accepts_nested_attributes_for :zones
 
