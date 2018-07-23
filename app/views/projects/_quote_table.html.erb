@@ -1,0 +1,158 @@
+<div class="grid-x grid-margin-x project-container">
+    <div class="cell small-12 text-right">
+      <div class="button primary large" style="border-radius: 5px; border: 2px solid white; color: white; margin-bottom: 0; margin-top: 10px;" data-open="notify_clients">
+        Notify clients of quote changes
+      </div>
+      <div class="reveal" id="notify_clients" data-reveal>
+        <h2>Send an email to your clients</h2>   
+        <%= render 'quote_messages/form', project: @project %>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+        
+    
+
+    <div class="cell small-12">
+      <table class="quote-table">
+        <thead>
+          <th>Status</th>
+          <th>Item</th>
+          <th>Notes</th>
+          <th>Variation?</th>
+          <th>Est Unit Price</th>
+          <th>Quoted Price</th>
+          <th>Quote</th>
+        </thead>
+
+        <tbody>
+          <% @project_items.each do |project_item| %>
+          <% @myvariation = Variation.where(project_item_id: project_item.id).last %>
+          <% if project_item.quote_total.present? && project_item.discussion_raised != true && @myvariation.blank? %>
+            <tr style= "background-color: #bee0d1">
+          <% elsif project_item.discussion_raised == true %>
+            <tr style= "background-color: #e8c9c9">
+          <% elsif @myvariation.present? && @myvariation.price.blank? %>
+            <tr style= "background-color: #FFDEA3">
+          <% elsif @myvariation.present? && @myvariation.price.present? %>
+            <tr style= "background-color: #bee0d1">
+          <% else %>
+            <tr>
+          <% end %>
+          <% if project_item.quote_total.present? && project_item.discussion_raised != true && @myvariation.blank? %>
+            <td width="10%" class="text-center" style="font-size: 30px; color: #19935c;">
+              <i class="fa fa-check-circle"></i>
+            </td>
+          <% elsif project_item.quote_total.present? && project_item.discussion_raised != true && @myvariation.present? && @myvariation.price.blank? %>
+            <td width="10%" bgcolor="#EA2E00" class="text-center" style="font-size: 30px; color: #fff;">
+              <i class="fa fa-exclamation-circle"></i>
+            </td>
+          <% elsif project_item.quote_total.present? && project_item.discussion_raised != true && @myvariation.present? && @myvariation.price.present? %>
+            <td bgcolor="#19935C" width="10%" class="text-center" style="font-size: 30px; color: #fff; border-left: 1px solid #19935C;">
+              <i class="fa fa-check-circle"></i>
+            </td>
+
+          <% elsif project_item.discussion_raised == true %>
+            <td width="10%" class="text-center" style="font-size: 30px; color: #ba0000;">
+              <i class="fa fa-times"></i>
+            </td>
+          <% else %>
+            <td width="10%" class="text-center" style="font-size: 30px; color: #aaa;">
+              <i class="fa fa-ellipsis-h"></i>
+            </td>
+          <% end %>
+            
+            <td width="20%" style="font-size: 14px;">
+              <%= project_item.item.title %>
+            </td>
+            <td width="15%">
+              <i><%= project_item.quote_note %></i> 
+            </td>
+            <td width="10%">
+              <% if project_item.category_id == @project.category_id %>
+              Inside of scope
+              <% else %>
+              Outside of scope
+              <% end %>
+            </td>
+            <td width="10%">
+              <%= number_to_currency(project_item.item.cost, precission: 2) %> per
+              <% if project_item.item.unit_label.present? %>
+                <%= project_item.item.unit_label %>
+              <% end %>
+            </td>
+            <td width="10%">
+              <% if project_item.quote_total.present? %>
+              <%= number_to_currency(project_item.quote_total, precission: 2) %>
+              <% else %>
+              <small><i>Not Quoted</i> </small>
+              <% end %>
+            </td>
+            <td width="25%" style="text-align: center">
+              <% if project_item.category_id == @project.category_id %>
+                  <% if @category_based != true || project_item.quote_approved == true && @myvariation.blank? %>
+                  <%= render 'quote_form', project_item: project_item, project: @project %>
+                  <% elsif @category_based != true || project_item.quote_approved == true && @myvariation.present? %>
+                    <%= render 'quote_variation_form', project_item: project_item, project: @project, myvariation: @myvariation %>
+                  <% else %>
+                    <% if project_item.quote_approved != true %>
+                    Item included in category
+                    <% end %>
+                    <div class="grid-x">
+                    <div class="cell auto">
+                      <div class="quote-form-button-<%= project_item.id %> button success expanded">Alter Price</div>
+                    </div>
+                    <% if project_item.quote_total.blank? %>
+                    <div class="cell auto quote-form-default-<%= project_item.id %>">
+                      <%= render 'quote_form_included_default', project_item: project_item, project: @project %>
+                    </div>
+                    <% end %>
+                </div>
+                
+
+                <div class="quote-form-container quote-form-container-<%= project_item.id %>">
+                  <%= render 'quote_form_included', project_item: project_item, project: @project %>
+                </div>
+                <script>
+                  $(".quote-form-button-<%= project_item.id %>").click(function () {
+                      $(this).hide();
+                      $('.quote-form-default-<%= project_item.id %>').hide();
+                      $(".quote-form-container-<%= project_item.id %>").show();
+                  });
+                </script>
+                <% end %>
+              <% else %>
+        
+                  <%= render 'quote_form', project_item: project_item, project: @project %>
+  
+              <% end %>
+            </td>
+          </tr>
+          <% if @myvariation.present? %>
+            <% if @myvariation.price.blank? %>
+            <tr class="variation-pending">
+            <% elsif @myvariation.price.present? %>
+            <tr class="quote-approved">
+            <% end %>
+            <td colspan="3">
+              <h4> VARIATION REQUESTED - <%= @myvariation.item.title %></h4>
+            </td>
+            <td colspan="2">
+              <% if @myvariation.item.category_id == @project.category_id %>
+              Inside of scope
+              <% else %>
+              Outside of scope
+              <% end %>
+            </td>
+            <td colspan="2">
+              EST: <%= number_to_currency(@myvariation.item.cost, precission: 2) %> per <%= @myvariation.item.unit_label %>
+            </td>
+  
+          </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

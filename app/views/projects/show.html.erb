@@ -1,0 +1,46 @@
+<% if params.has_key?(:quote_stage) %>
+  <div style="background-color: #39ba82; padding: 20px; color: #fff;">
+      <div class="grid-x grid-margin-x" >
+        <div class="cell small-12 medium-6" >
+            <%= render 'projects/header', project: @project %>
+        </div>
+        <div class="cell small-12 medium-6 text-right">
+          <%= render 'projects/quote', project: @project %>
+        </div>
+      </div>
+    </div>
+      <%= render 'projects/secondary_header', project: @project %>
+  
+  <%= render 'projects/quote_table', project_items: @project_items %>
+  
+<% else %>
+  <div style="background-color: #39ba82; padding: 20px; color: #fff;">
+
+      <div class="grid-x grid-margin-x" >
+        <div class="cell small-12 medium-6" >
+            <%= render 'projects/header', project: @project %>
+         
+        </div>
+        <div class="cell small-12 medium-6 text-right">
+          <%= render 'projects/quote', project: @project %>
+        </div>
+      </div>
+
+  </div>
+  <%= render 'projects/secondary_header', project: @project %>
+  <!-- Project Body -->
+  <div class="grid-x grid-margin-x  project-container">
+    <div class="cell medium-12">
+      <div class="grid-x">
+        <div class="small-12" style="margin-bottom: 20px;">
+          <%= render 'projects/project_clients' %>
+        </div>
+      </div>
+      
+      <%= render 'projects/project_signoff', project: @project, project_items: @project_items %>
+      <%= render 'projects/project_table_items', zones: @zones  %>
+    </div>
+    
+  </div>
+
+<% end %>

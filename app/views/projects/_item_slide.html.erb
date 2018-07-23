@@ -1,0 +1,226 @@
+
+<div style="background-color: #f5f5f5">
+<div class="grid-container">
+    <div style="padding: 40px 0">
+      <h2>Select an item</h2>
+    </div>
+    <% @items.each do |item| %>
+        <% @item_attributes = ItemAttribute.where(item_id: item.id).all %>
+        <div class="grid-x grid-margin-x grid-margin-y item-slide-container">
+          <div class="cell small-12 medium-3 item-slide-image">
+
+
+              <% item.files.first(1).each do |file| %>
+                  <div>
+                  <%= image_tag file, :size => "400x400", :crop => :fill %>
+                  </div> 
+              <% end %>
+          
+
+          </div>
+          <div class="cell small-12 medium-6">
+            <div>
+              <h2><%= item.title %></h2>
+              <small>SKU: <%= item.item_code %></small><br />
+              <% if item.supplier.logo.attached? %>
+              <div class="grid-x">
+                <div class="cell shrink">
+                  <%= image_tag item.supplier.logo, :size => "100x40", :crop => :fill %>
+                </div>
+                <div class="cell shrink">
+                  <%= link_to "View Supplier Details", supplier_path(item.supplier.id), class: "supplier-details", target: "_blank" %>
+                </div>
+              </div>
+                
+              <% end %>
+            </div>
+            <div class="item-slide-container-description">
+              <%= item.description %>
+            </div>
+          </div>
+          <div class="cell small-12 medium-3">
+            <% if @item_attributes.present? %>
+              <div class="item-slide-attribute-text">
+                <i class="fa fa-exclamation-circle"></i> This item has child attributes attached, to view these simply click the button below to see a tableof all available attributes.
+              </div>
+              <div class="button success expanded" id="item_attribute_button_<%= item.id %>">
+                Choose an attribute
+              </div>
+            <% else %>
+              <%= form_tag project_project_item_path(@project.id) do %>
+                <%= hidden_field_tag :project_id, @project.id %>
+                <%= hidden_field_tag :zone_id, zone.id %>
+                <%= hidden_field_tag :zone_item_group_id, zone_item.id %>
+                <%= hidden_field_tag :category_id, @project.category_id %>
+                <%= hidden_field_tag :item_group_id, zone_item.item_group.id %>
+                <%= hidden_field_tag :item_id, item.id %>
+                <%= submit_tag "Add Item", class: "button success expanded", style: "margin-top: 20px" %>
+              <% end %>
+            <% end %>
+          </div>
+          <script>
+            $( "#item_attribute_button_<%= item.id %>" ).click(function() {
+              $( "#item_attribute_<%= item.id %>" ).slideToggle( "slow", function() {
+              });
+            });
+          </script>
+          <div class="cell small-12">
+            <div class="item_attribute_row" id="item_attribute_<%= item.id %>" style="margin-bottom: 20px;">
+              <table>
+                <thead>
+                  <th width="20%">Images</th>
+                  <th width="20%">Attribute</th>
+                  <th width="20%">Item Title</th>
+                  <th width="10%">Item Code</th>
+                  <th width="30%"></th>
+                </thead>
+                <tbody>
+                  <% @item_attributes.each do |item_attribute| %>
+                  <tr>
+                    <td>
+                      <% item_attribute.images.first(1).each do |image| %>
+                          <div>
+                          <%= image_tag image, :size => "200x200", :crop => :fill %>
+                          </div> 
+                      <% end %>
+                    </td>
+                    <td><%= item_attribute.title %></td>
+                    <td><%= item.title %></td>
+                    <td><%= item_attribute.item_code %></td>
+                    <td>
+                      <!-- Check for attributes -->
+                      <% @item_attributes = ItemAttribute.where(item_id: item.id).all %>
+                      
+                        <%= form_tag project_project_item_path(@project.id) do %>
+                          <%= hidden_field_tag :project_id, @project.id %>
+                          <%= hidden_field_tag :zone_id, zone.id %>
+                          <%= hidden_field_tag :zone_item_group_id, zone_item.id %>
+                          <%= hidden_field_tag :category_id, @project.category_id %>
+                          <%= hidden_field_tag :item_group_id, zone_item.item_group.id %>
+                          <%= hidden_field_tag :item_attribute_id, item_attribute.id %>
+                          <%= hidden_field_tag :item_id, item_attribute.item.id %>
+                          <%= submit_tag "Add Item", class: "button success expanded", style: "margin-top: 20px" %>
+                        <% end %>
+                    
+
+                    </td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              
+            </div>
+          </div>
+        </div>
+
+        
+
+    <% end %>
+</div>
+
+<!-- Items outside of the category -->
+<div class="grid-container">
+<div class="grid-x grid-margin-x">
+  <div class="cell small-12">
+    <% if @category_based == true %>
+      <h2>Items outside of scope</h2>
+    <% end %>
+  </div>
+</div>
+</div>
+
+
+<div class="grid-container">
+    <% @other_items.each do |item| %>
+        <% @item_attributes = ItemAttribute.where(item_id: item.id).all %>
+        <div class="grid-x grid-margin-x grid-margin-y" style="margin-bottom: 10px;">
+          <div class="cell small-12 medium-3">
+            <img src="http://www.mbvision.it/huninthesun/wp-content/uploads/2015/04/placeholder-600x400.png" width="100%">
+          </div>
+          <div class="cell small-12 medium-6">
+            <div>
+              <%= item.title %><br />
+              <small>SKU: <%= item.item_code %></small><br />
+              <% if item.supplier.logo.attached? %>
+                <%= image_tag item.supplier.logo, :size => "100x40", :crop => :fill %>
+              <% end %>
+            </div>
+            <div class="modal-item-description">
+              <%= item.description %>
+            </div>
+          </div>
+          <div class="cell small-12 medium-3">
+            <% if @item_attributes.present? %>
+              <div class="button success expanded" id="other_item_attribute_button_<%= item.id %>">
+                Choose an attribute
+              </div>
+            <% else %>
+              <%= form_tag project_project_item_path(@project.id) do %>
+                <%= hidden_field_tag :project_id, @project.id %>
+                <%= hidden_field_tag :zone_id, zone.id %>
+                <%= hidden_field_tag :zone_item_group_id, zone_item.id %>
+                <%= hidden_field_tag :category_id, @project.category_id %>
+                <%= hidden_field_tag :item_group_id, zone_item.item_group.id %>
+                <%= hidden_field_tag :item_id, item.id %>
+                <%= submit_tag "Add Item", class: "button success expanded", style: "margin-top: 20px" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <script>
+          $( "#other_item_attribute_button_<%= item.id %>" ).click(function() {
+            $( "#other_item_attribute_<%= item.id %>" ).slideToggle( "slow", function() {
+            });
+          });
+        </script>
+        
+        <div class="item_attribute_row" id="other_item_attribute_<%= item.id %>" style="margin-bottom: 20px;">
+          <table>
+            <thead>
+              <th width="10%">Images</th>
+              <th width="30%">Attribute</th>
+              <th width="20%">Item Title</th>
+              <th width="10%">Item Code</th>
+              <th width="30%"></th>
+            </thead>
+            <tbody>
+              <% @item_attributes.each do |item_attribute| %>
+              <tr>
+                <td></td>
+                <td><%= item_attribute.title %></td>
+                <td><%= item.title %></td>
+                <td><%= item_attribute.item_code %></td>
+                <td>
+                  <!-- Check for attributes -->
+                  <% @item_attributes = ItemAttribute.where(item_id: item.id).all %>
+                  
+                    <%= form_tag project_project_item_path(@project.id) do %>
+                      <%= hidden_field_tag :project_id, @project.id %>
+                      <%= hidden_field_tag :zone_id, zone.id %>
+                      <%= hidden_field_tag :zone_item_group_id, zone_item.id %>
+                      <%= hidden_field_tag :category_id, @project.category_id %>
+                      <%= hidden_field_tag :item_group_id, zone_item.item_group.id %>
+                      <%= hidden_field_tag :item_attribute_id, item_attribute.id %>
+                      <%= hidden_field_tag :item_id, item_attribute.item.id %>
+                      <%= submit_tag "Add Item", class: "button success expanded", style: "margin-top: 20px" %>
+                    <% end %>
+                
+
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          
+        </div>
+
+    <% end %>
+</div>
+
+
+<button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  </div>

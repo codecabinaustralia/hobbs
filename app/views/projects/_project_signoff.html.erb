@@ -1,0 +1,9 @@
+<% if @project.confirmed == false || @project.confirmed == nil %>
+<% @approved_project_items = ProjectItem.where(project_id: @project.id).where(quote_approved: true).all %>
+	<% if @approved_project_items.count == @project_items.count && @approved_project_items.count > 0 %>
+	<div class="project-confirm-bar">
+	  <%= link_to "Confirm Items", project_confirm_project_path(@project.id), class: "button large success hollow", style: "border: 2px solid white; color: #fff; margin-bottom:0;" %>
+	</div>
+	<% end %>
+<% end %>
+

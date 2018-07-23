@@ -1,0 +1,331 @@
+// Place all the styles related to the Projects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.orbit-container {
+    min-height: 375px;
+}
+.project-container{
+	margin-top: 10px;
+	padding: 40px;
+}
+
+.table-sml-img img{
+	border-radius: 5px;
+}
+
+
+.item-slide-container{
+	border: 2px solid #e5e5e5;
+	background-color: #fff;
+	padding: 20px;
+	margin-bottom: 40px;
+}
+
+.item-slide-container h2{
+	font-size: 22px;
+	font-weight: bold;
+	color: #3e4b54;
+}
+
+.item-slide-container small{
+	font-size: 11px;
+	color: #75838c;
+}
+
+.item-slide-container-description {
+	font-size: 14px;
+	color: #42535e;
+	margin-top: 10px;
+}
+
+.item-slide-attribute-text {
+	font-size: 12px;
+	color: #42535e;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.hide-orbit{
+	display: none;
+}
+
+.supplier-details{
+	font-size: 11px;
+	color: #0366a0;
+	text-decoration: underline;
+	margin-top: 15px;
+	margin-left: 20px;
+}
+
+.item-slide-image img:hover{
+	cursor: pointer;
+}
+
+.supplier-details:hover{
+	cursor: pointer;
+}
+
+.zone-item-rows{
+	width: 100%;
+	padding: 20px;
+	border-bottom: #aaa solid 5px;
+	background-color: #f5f5f5;
+	text-align: center;
+}
+
+.project-address{
+	color: #fff !important;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.item_attribute_row{
+	display: none;
+}
+
+.selections-area{
+	background-color: #f9f9f9;
+	border-top: 1px solid #e5e5e5;
+	margin-bottom: 100px;
+
+}
+
+.selections_header_selected{
+	padding: 20px;
+	border-bottom: 5px solid #4c5763;
+	background-color: #c9e0d6;
+	margin-top: 20px;
+}
+
+.selections_header_selected i{
+	font-size: 50px !important;
+	color: #39ba82 !important;
+}
+
+.selections_header{
+	padding: 20px;
+	border-bottom: 1px solid #e5e5e5;
+	transition: all ease .25;
+}
+
+.selections_header:hover{
+	background-color: #a0a0a0;
+	cursor: pointer;
+}
+
+.selections-area-top{
+	background-color: #f0f0f0;
+	padding: 20px;
+	border-top: 1px solid #e5e5e5;
+	margin-bottom: 40px;
+}
+
+.project-confirm-bar{
+	position: fixed;
+	bottom: 0;
+	background-color: #39ba82;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+	z-index: 99;
+	left: 0;
+}
+
+.modal-item-title{
+	width: 100%;
+	padding: 10px;
+	background-color: #f5f5f5;
+	text-align: center;
+	min-height: 80px;
+	border: 1px solid #e5e5e5;
+	border-top: 0 !important;
+}
+
+.modal-item-box.active{
+	background-color: #39ba82;
+	border: 2px solid #1e8456;
+}
+
+.modal-item-box.active img{
+	opacity: 0.2;
+}
+
+.modal-item-box.active .modal-item-title{
+	width: 100%;
+	padding: 10px;
+	background-color: #39ba82;
+	color: #fff;
+	text-align: center;
+	min-height: 80px;
+	border: 0 !important;
+}
+
+.project-item-list-title{
+	background-color: #3c454f;
+	padding: 5px 0;
+	color: #fff;
+}
+
+.project-item-list-title-success{
+	background-color: #39ba82;
+	padding: 5px 0;
+	color: #fff;
+}
+
+.variation-panel{
+	color: #fff;
+	background-color: #39ba82;
+	padding: 20px;
+}
+
+.variation-panel h4{
+	color: #fff;
+}
+
+.variation-status{
+	border-left: 2px solid white;
+	padding: 5px;
+	font-size: 12px;
+}
+
+.quote-price{
+	text-align: center;
+	background-color: #3c454f;
+	padding: 5px;
+}
+
+.quote-approval{
+	background-color: #19935c;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.current-project-value h2{
+	color: white;
+	margin-bottom: 0 !important;
+}
+.current-project-value{
+	padding: 10px 5px;
+	background-color: #19935c; 
+}
+
+/* MSGS */
+
+.my-msg{
+	 background-color: #19935c;
+	 padding: 10px;
+	 width: 80%;
+	 margin-top: 15px;
+	 color: #fff;
+	 font-size: 13px;
+	 -webkit-border-top-left-radius: 5px;
+	 -webkit-border-top-right-radius: 5px;
+	 -moz-border-radius-topleft: 5px;
+	 -moz-border-radius-topright: 5px;
+	 border-top-left-radius: 5px;
+	 border-top-right-radius: 5px;
+}
+
+.your-msg{
+	 background-color: #0e76bc;
+	 padding: 10px;
+	 width: 80%;
+	 margin-top: 15px;
+	 color: #fff;
+	 float: right;
+	 font-size: 13px;
+	 -webkit-border-top-left-radius: 5px;
+	 -webkit-border-top-right-radius: 5px;
+	 -moz-border-radius-topleft: 5px;
+	 -moz-border-radius-topright: 5px;
+	 border-top-left-radius: 5px;
+	 border-top-right-radius: 5px;
+}
+
+.post-reply-container{
+	background-color: #ccc;
+	padding: 10px;
+	font-size: 12px;
+	border-bottom: 3px solid #aaa;
+}
+
+.my-msg-avatar img{
+	width: 50px;
+	height: 50px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	object-fit: cover;
+	margin-top: 30px;
+}
+
+.your-msg-avatar img{
+	width: 50px;
+	height: 50px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	object-fit: cover;
+	margin-top: 30px;
+}
+
+.item-img img{
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+}
+
+.item-img-sml img{
+	width: 70px;
+	height: 70px;
+	object-fit: cover;
+}
+
+.document-upload{
+	padding: 20px;
+	background-color: #f5f5f5;
+	border: 1px solid #e5e5e5;
+	margin-top: 20px;
+	
+}
+
+.accordion-item{
+	padding: 0 !important;
+	background-color: #29353D !important;
+	color: #fff !important;
+	border: none !important;
+	border-bottom: 3px solid #3e4b54 !important;
+}
+
+.accordion-title, .accordion-title a{
+	color: #fff !important;
+	background-color: #29353D !important;
+	font-size: 20px;
+	border: none !important;
+	transition: all 0.25 ease;
+}
+
+.accordion-title:hover , .accordion-title a:hover{
+	background-color: #3e4b54 !important;
+}
+
+.accordion-content{
+	background: repeating-linear-gradient(
+  45deg,
+  #dee4e8,
+  #dee4e8 10px,
+  #e6f0f7 10px,
+  #e6f0f7 20px
+);
+}
+
+/* Quote Table */
+.quote-form-container{
+	display: none;
+}

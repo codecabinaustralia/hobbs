@@ -1,0 +1,82 @@
+            
+              Current project value
+
+              <!-- Category Based -->
+                <% if @project.base_price != nil %>
+                <% @all_approved_items = ProjectItem.where(project_id: @project.id).where(quote_approved: true).all %>
+                <% @sum_of_items = @all_approved_items.sum(:quote_total) %>
+                <% @variations = Variation.where(project_id: @project.id).where(approved: true).all %>
+                  <% @sum_of_variations = @variations.sum(:price) %>
+                  <h2><%= number_to_currency(@project.base_price + @sum_of_items + @sum_of_variations, precission: 2) %></h2>
+                  <div class="button primary" data-open="breakdown_quote">Get Breakdown</div><br />
+
+                  <div class="reveal" id="breakdown_quote" data-reveal>
+                    <h1>Quote breakdown</h1>
+                    <table>
+                      <% @all_approved_items.each do |p_item| %>
+                      <tr>
+                        <td>
+                          <%= p_item.item.title %>
+                        </td>
+      
+                        <td class="text-right">
+                          <%= number_to_currency(p_item.quote_total, precission: 2) %>
+                        </td>
+                      </tr>
+                      <% end %>
+                      <% if @variations.count != 0 %>
+                      <tr style="background-color: #29353D; color: #fff;">
+                        <td colspan="2">
+                          <h4>Variations: </h4>
+                        </td>
+                      </tr>
+                      <% end %>
+                      <% @variations.each do |v_item| %>
+                      <tr>
+                        <td>
+                          <%= v_item.item.title %>
+                        </td>
+      
+                        <td class="text-right">
+                          <%= number_to_currency(v_item.price, precission: 2) %>
+                        </td>
+                      </tr>
+                      <% end %>
+                      <tr>
+                        <td style="background-color: #fff;"></td>
+
+                        <td class="text-right">
+                          <h2><%= number_to_currency(@project.base_price + @sum_of_items + @sum_of_variations, precission: 2) %></h2>
+                        </td>
+                      </tr>
+                    </table>
+                    <button class="close-button" data-close aria-label="Close modal" type="button">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <% end %>
+                
+
+                <!-- Items currently pending -->
+                <% @quoting_items = ProjectItem.where(project_id: @project.id).where(quote_total: nil).all %>
+                <% if @quoting_items.present? %>
+                <i>Some items currently pending quotation</i> <br />
+                <% end %>
+
+                <!-- Items currently waiting approval -->
+                <% @approving_items = ProjectItem.where(project_id: @project.id).where(quote_total: nil).where(quote_approved: [nil, false]).all %>
+                <% if @approving_items.present? %>
+                <i>Some items needing your approval</i> 
+                <% end %>
+
+                <!-- Items currently waiting approval -->
+                <% @variations = Variation.where(project_id: @project.id).where(price: nil).all %>
+                <% if @variations.present? %>
+                <i>Variation items currently pending quotation</i> 
+                <% end %>
+
+                <!-- Items currently waiting approval -->
+                <% @variations = Variation.where(project_id: @project.id).where.not(price: nil).where(approved: [nil, false]).all %>
+                <% if @variations.present? %>
+                <i>Variation items needing your approval</i> 
+                <% end %>

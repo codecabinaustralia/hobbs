@@ -1,0 +1,55 @@
+<table class="client-table">
+<tr class="row-unpresent">   
+    <td class="status-icon"><i class="fa fa-ellipsis-h" style="font-size: 24px;"></i></td>
+    <td>
+      <%= zone_item.item_group.title %>
+      <%= link_to delete_zone_group_path(:zone_group_id => zone_item.id) do %>
+        <i class="fa fa-trash"></i>
+      <% end %>
+    </td>
+    <td>
+      <h4>
+        Please select an item
+      </h4>
+    </td>
+    <td></td>
+    <td>
+        <div class="button success expanded" data-open="item_modal_<%= zone_item.id %>">Add Item</div>
+        <div class="button primary expanded" data-open="item_upload_<%= zone_item.id %>">
+          <i class="fa fa-upload"></i> Upload your own item </div>
+        
+    </td>
+    <td></td>
+    <td class="text-center" data-open="help_modal_<%= zone_item.id %>">
+        <i class="fa fa-question-circle"></i>
+        <!-- Tip Modal -->
+        <div class="reveal" id="help_modal_<%= zone_item.id %>" data-reveal>
+          <% @tips = Tip.where(item_group_id: zone_item.item_group.id).all %>
+          <h2>Tips</h2>
+          <% @tips.each do |tip| %>
+            <p class="lead"><%= tip.content %></p>
+          <% end %>
+        </div>
+    </td>
+</tr>  
+
+</table>
+
+
+
+<div class="reveal full" id="item_modal_<%= zone_item.id %>" data-reveal data-v-offset="0">
+  <%= render 'item_slide', items: @items, other_items: @other_items, zone_item: zone_item, project: @project, zone: zone %>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="reveal" id="item_upload_<%= zone_item.id %>" data-reveal data-v-offset="0">
+  <h2>See something you like?</h2>
+  <p class="lead">Upload an image of your item and as many details as possible.</p>
+  <% @item = Item.new %>
+  <%= render 'items/form_user', items: @items, other_items: @other_items, zone_item: zone_item, project: @project, zone: zone %>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

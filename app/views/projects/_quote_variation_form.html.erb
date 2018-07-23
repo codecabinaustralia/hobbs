@@ -1,0 +1,9 @@
+<%= form_for @myvariation, url: variation_variation_quote_path(@myvariation.id) do |f| %>
+  <div class="input-group">
+    <span class="input-group-label">$</span>
+    <%= f.text_field :price, class: "input-group-field" %>
+    <div class="input-group-button">
+      <%= f.submit "Submit Quote", class: "button" %>
+    </div>
+  </div>
+<% end %>

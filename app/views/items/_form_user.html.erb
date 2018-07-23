@@ -1,0 +1,28 @@
+  <%= nested_form_for @item, local: true, html: { multipart: true, id: "my-form" } do |form| %>
+
+      <%= form.text_field :title,placeholder: "Enter a title for this item" %>
+      <%= form.text_field :item_code, placeholder: "Item code" %>
+      <%= form.text_field :brand, placeholder: "What brand is this item" %> 
+      <%= form.text_field :cost, placeholder: "eg: 50.00" %> 
+      per
+      <%= form.text_field :unit_label, placeholder: "eg: metre, sq metre, cubic metre" %> 
+
+      <%= form.hidden_field :category_id, value: @project.category_id %>
+      <%= form.hidden_field :item_group_id, value: zone_item.item_group.id %> 
+      <%= form.check_box :user_uploaded, checked: true %> 
+      <%= form.hidden_field :item_group_id, value: zone_item.item_group.id %> 
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.hidden_field :project_id, value: @project.id %>
+      <%= form.hidden_field :zone_id, value: zone.id %>
+      <%= form.hidden_field :zone_item_group_id, value: zone_item.id %>
+
+      <%= form.text_field :user_item_storename, placeholder: "Store where you found the item" %> 
+      <%= form.text_field :user_item_location, placeholder: "Suburb of the store" %> 
+
+      <%= form.file_field :files, direct_upload: true, multiple: true %>
+      <%= form.submit "Submit", class: "button success" %>
+
+  <% end %>
+
+
+

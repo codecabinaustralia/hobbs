@@ -1,0 +1,10 @@
+<%= form_for project_item, url: project_project_item_close_path(@project.id) do |f| %>
+      <% if project_item.quote_total.blank? %>
+        <%= f.hidden_field :quote_total, class: "input-group-field", value: 0.00 %>
+      <% else %>
+        <%= f.hidden_field :quote_total, class: "input-group-field" %>
+      <% end %>
+      <%= f.hidden_field :item_id, value: project_item.id %>
+      <%= f.submit "Submit Quote", class: "button primary expanded" %>
+
+  <% end %>

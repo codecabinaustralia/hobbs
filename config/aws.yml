@@ -1,0 +1,7 @@
+development:
+  access_key_id: AKIAIRC5MI3RMTID7MZA
+  secret_access_key: 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
+
+production:
+  access_key_id: AKIAIRC5MI3RMTID7MZA
+  secret_access_key: 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

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Quote Messages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Body</th>
+      <th>Project</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quote_messages.each do |quote_message| %>
+      <tr>
+        <td><%= quote_message.body %></td>
+        <td><%= quote_message.project %></td>
+        <td><%= quote_message.user %></td>
+        <td><%= link_to 'Show', quote_message %></td>
+        <td><%= link_to 'Edit', edit_quote_message_path(quote_message) %></td>
+        <td><%= link_to 'Destroy', quote_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Quote Message', new_quote_message_path %>

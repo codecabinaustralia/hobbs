@@ -1,0 +1,2 @@
+module ProgressShotsHelper
+end

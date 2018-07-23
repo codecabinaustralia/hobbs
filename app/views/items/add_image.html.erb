@@ -1,0 +1,7 @@
+  <%= form_for @item, :method => :put, html: { multipart: true, id: "my-form" } do |form| %>
+    <%= form.file_field :files, direct_upload: true %>
+  <%= form.submit "Submit", class: "button success" %>
+  <% end %>
+
+
+

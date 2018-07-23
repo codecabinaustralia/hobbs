@@ -1,0 +1,85 @@
+<div class="grid-x">
+  
+  <% @clients = ProjectUser.where(project_id: @project.id).where(role: [nil,false]).all %>
+  <% @owner = ProjectUser.where(project_id: @project.id).where(role: "owner").first %>
+  <% @clients.each do |client| %>
+    <div class="cell shrink">
+      <div class="grid-x">
+        <div class="cell shrink">
+          <div class="circle-avatar-small">
+            <% if client.user.avatar.attached? %>
+                <%= image_tag client.user.avatar, :size => "100x100", :crop => :fill %>
+            <% else %>
+            <img src="https://s3-us-west-2.amazonaws.com/hobbs-building/assets/avatar.png" alt="avatar" width="100">
+            <% end %>
+          
+          </div>
+        </div>
+        <div class="cell shrink">
+          <div class="avatar-card">
+          <strong><%= (client.user.first_name.presence && client.user.first_name.presence || client.user.email).upcase %></strong><br />
+          <small><%= client.user.phone %></small><br />
+          <small><%= client.user.email %></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @owner.present? %>
+    <div class="cell shrink">
+      <div class="grid-x">
+        <div class="cell shrink">
+          <div class="circle-avatar-small">
+            <% if @owner.user.avatar.attached? %>
+                <%= image_tag @owner.user.avatar, :size => "100x100", :crop => :fill %>
+            <% else %>
+            <img src="https://s3-us-west-2.amazonaws.com/hobbs-building/assets/avatar.png" alt="avatar" width="100">
+            <% end %>
+          
+          </div>
+        </div>
+        <div class="cell shrink">
+          <div class="avatar-card">
+          <strong><%= (@owner.user.first_name.presence && @owner.user.first_name.presence || @owner.user.email).upcase %></strong><br />
+          <small><%= @owner.user.phone.presence || "no phone" %></small><br />
+          <small><%= @owner.user.email %></small><br />
+          <small style="color: #19935C; font-weight: bold;">PROJECT MANAGER</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="cell auto">
+    <div class="grid-x">
+      <div class="cell shrink">
+        <div class="avatar-card-green" data-open="add_customer">
+        <h5><i class="fa fa-plus-circle"></i> ADD A NEW CLIENT</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="reveal" id="add_customer" data-reveal>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h2>Add a new client</h2>
+      <p class="lead">Enter your client's email address and we'll send them a nice welcome email and instructions on how to access their project.</p>
+                <%= form_for [@project, ProjectUser.new] do |f| %>
+                <div class="grid-x">
+                  <div class="cell small-12 medium-10 medium-offset-1">
+                    <div class="input-group">
+                      <span class="input-group-label "><i class="fa fa-envelope"></i></span>
+                      <%= f.text_field :email, required: :true, class: "input-group-field",placeholder: "Email Address" %>
+                      <div class="input-group-button">
+                        <%= f.submit "Invite Client", class: "button success" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+            </div>
+

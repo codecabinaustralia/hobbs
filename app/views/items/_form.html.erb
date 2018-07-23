@@ -1,0 +1,46 @@
+  <%= nested_form_for @item, local: true, html: { multipart: true, id: "my-form" } do |form| %>
+
+        <%= form.text_field :title,placeholder: "Enter a title for this item" %>
+        <%= form.text_field :item_code, placeholder: "Item code" %>
+        <%= form.file_field :files, direct_upload: true, multiple: true %>
+        <%= form.text_field :description, placeholder: "Enter a description for this item" %>
+
+        <%= form.text_field :brand, placeholder: "What brand is this item" %>
+
+        <%= form.text_field :cost, placeholder: "eg: 50.00" %> 
+        per
+        <%= form.text_field :unit_label, placeholder: "eg: metre, sq metre, cubic metre" %> 
+        <h3>Select a supplier</h3>
+        <%= form.collection_select(:supplier_id, Supplier.all,
+                  :id, :name,
+                 {:prompt => 'Assign item to a plan'}, class: "submit_select")%>
+        <h3>Select a category</h3>
+        <%= form.collection_select(:category_id, Category.all,
+                  :id, :title,
+                 {:prompt => 'Assign item to a plan'}, class: "submit_select")%>
+        <h3>What group does this belong to (should be multiple)</h3>
+        <%= form.collection_select(:item_group_id, ItemGroup.all,
+                      :id, :title,
+                     {:prompt => 'Categorise this item'}, class: "submit_select")%>
+        <div style="padding: 20px; background-color: #f5f5f5; border: 2px solid #e5e5e5;">
+
+        <h2>Attributes</h2>
+        <%= form.fields_for :item_attributes do |attribute| %>
+        <label for="title">Title</label>
+          <%= attribute.text_field :title %>
+          <label for="title">Item Code</label>
+          <%= attribute.text_field :item_code %>
+          <%= form.label :images %>
+          <%= form.file_field :images, direct_upload: true %>
+          <%= attribute.link_to_remove "Remove this attribute" %>
+        <% end %>
+        <p><%= form.link_to_add "Add a attribute", :item_attributes %></p>
+        </div>
+
+      
+      <%= form.submit "Submit", class: "button success" %>
+
+  <% end %>
+
+
+

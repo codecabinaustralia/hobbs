@@ -1,0 +1,93 @@
+<div class="current-project-value" style="padding: 20px 20px;">
+          <div class="grid-x">
+            <div class="cell auto text-left">
+              <div class="button hollow" style="border-radius: 5px; border: 2px solid white; color: white; margin-bottom: 0; margin-top: 10px;" data-open="document_storage">
+                Document Storage
+              </div>
+
+              <div class="button hollow" style="border-radius: 5px; border: 2px solid white; color: white; margin-bottom: 0; margin-top: 10px;" data-open="progress_shots">
+                Progress Shots
+              </div>
+
+              <div class="button warning" style="border-radius: 5px; border: 2px solid white; color: white; margin-bottom: 0; margin-top: 10px;" data-open="message_project_manager">
+                 Comliance Timeline
+              </div>
+
+              <div class="reveal" id="document_storage" data-reveal>
+                <h3>Document storage for <%= @project.title %></h3>
+                <p class="lead">Listed below are the documents attached to this project. To download the documents, please click the titles.</p>
+
+                <ul class="menu vertical">
+                  <% @documents = Document.where(project_id: @project.id).all %>
+                  <% @documents.each do |document| %>
+                    <li>
+                      <a href="<%= url_for(document.file) %>"><%= document.title %></a>
+                    </li>
+                  <% end %>
+                </ul>
+          
+                <div class="document-upload">
+                  <p class="lead">
+                    Admin, you can also upload new documents below
+                  </p>
+                  <% @document = Document.new %>
+                  <%= render 'documents/form', document: @document, project: @project.id %>
+                </div>
+
+                <button class="close-button" data-close aria-label="Close modal" type="button">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="reveal" id="progress_shots" data-reveal>
+                <h3>Progress shots for <%= @project.title %></h3>
+                <p class="lead">Here you can find alist of progress shots for your project.</p>
+
+                <ul class="menu vertical">
+                  <% @shots = ProgressShot.where(project_id: @project.id).all %>
+                  <% @shots.each do |shot| %>
+                    <li>
+                      <img src="<%= url_for(shot.image) %>">
+                      <p class="lead">
+                        <h4><%= shot.title %></h4>
+                        <small>Uploaded: <%= time_ago_in_words(shot.created_at) %></small><br />
+                        <%= shot.description %>
+                      </p>
+
+                    </li>
+                  <% end %>
+                </ul>
+                
+                <% if current_user.admin? %>
+                <div class="document-upload">
+                  <p class="lead">
+                    Admin, you can also upload new progress shots below
+                  </p>
+                  <% @progress_shot = ProgressShot.new %>
+                  <%= render 'progress_shots/form', progress_shot: @progress_shot, project: @project.id %>
+                </div>
+                <% end %>
+
+                <button class="close-button" data-close aria-label="Close modal" type="button">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+            </div>
+            
+          </div>
+  	  	  
+    	  </div>
+
+
+        <div class="reveal" id="message_project_manager" data-reveal>
+          
+          <%= render 'projects/project_timeline'  %>
+
+          <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+        

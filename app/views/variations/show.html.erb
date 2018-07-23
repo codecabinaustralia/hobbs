@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Project item:</strong>
+  <%= @variation.project_item %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @variation.price %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @variation.approved %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @variation.project %>
+</p>
+
+<%= link_to 'Edit', edit_variation_path(@variation) %> |
+<%= link_to 'Back', variations_path %>

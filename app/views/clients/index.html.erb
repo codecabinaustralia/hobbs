@@ -1,0 +1,43 @@
+<div class="grey-background">
+  <div class="grid-container">
+    <div class="grid-x">
+      <div class="cell small-12">
+<h1>Clients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Full name</th>
+      <th>Full name 2</th>
+      <th>Phone</th>
+      <th>Phone 2</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Postcode</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clients.each do |client| %>
+      <tr>
+        <td><%= client.user.email %></td>
+        <td><%= client.full_name %></td>
+        <td><%= client.full_name_2 %></td>
+        <td><%= client.phone %></td>
+        <td><%= client.phone_2 %></td>
+        <td><%= client.address %></td>
+        <td><%= client.city %></td>
+        <td><%= client.state %></td>
+        <td><%= client.postcode %></td>
+        <td><%= link_to 'Show', client %></td>
+        <td><%= link_to 'Edit', edit_client_path(client) %></td>
+        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div></div></div></div>

@@ -1,0 +1,39 @@
+<div class="grey-background">
+  <div class="grid-container">
+    <div class="grid-x">
+      <div class="cell small-12">
+<h1>Projects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Client</th>
+      <th>Title</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Postcode</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.category.title %></td>
+        <td><%= project.client.full_name %></td>
+        <td><%= project.title %></td>
+        <td><%= project.address %></td>
+        <td><%= project.city %></td>
+        <td><%= project.state %></td>
+        <td><%= project.postcode %></td>
+        <td><%= link_to 'Show', project %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div></div></div></div>

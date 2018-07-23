@@ -1,0 +1,29 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.text_area :content, placeholder: "Talk to your project manager here", rows: 3 %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :project_id, value: @project.id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Leave a message", class: "button float-right success" %>
+  </div>
+<% end %>

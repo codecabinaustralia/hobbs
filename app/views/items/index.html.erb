@@ -1,0 +1,71 @@
+<div class="grey-background">
+  <div class="grid-container">
+    <div class="grid-x">
+      <div class="cell small-12">
+<h1>Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Brand</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.title %></td>
+        <td><%= item.description %></td>
+        <td><%= item.brand %></td>
+        <td><%= item.category.title %></td>
+
+        <td><%= link_to 'Show', item %></td>
+        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Brand</th>
+      <th>Category</th>
+      <th>User generated?</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_items.each do |item| %>
+      <tr>
+        <td><%= item.title %></td>
+        <td><%= item.description %></td>
+        <td><%= item.brand %></td>
+        <td><%= item.category.title %></td>
+        <td>
+          <% if item.user_uploaded == true %>
+          <%= link_to "Save to all projects", item_save_user_item_path(item, :project_id => item.project_id), class: "button primary" %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', item %></td>
+        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+</div>
+</div>
+</div>
+</div>

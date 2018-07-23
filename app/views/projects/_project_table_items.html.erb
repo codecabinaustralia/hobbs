@@ -1,0 +1,84 @@
+<!-- Add Zones -->
+<% @zones.each do |zone| %>
+<div class="grid-x">
+  <div class="cell small-6">
+    <h2><%= zone.title %> 
+        <%= link_to zone, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash zone-destroy"></i>
+        <% end %>
+    </h2>
+  </div>
+  <div class="cell small-6 text-right">
+    <div class="button success" data-open="zone_modal_<%= zone.id %>">
+      <i class="fa fa-plus-circle"></i> Add item group
+    </div>  
+
+    <!-- Item Group Modal -->
+    <div class="reveal" id="zone_modal_<%= zone.id %>" data-reveal>
+      <h2>Add item groups to the <%= zone.title %></h2>
+      <div class="grid-x">
+        <% @item_groups.each do |item_group| %>
+        <div class="cell small-12 zone-item-rows">
+          <%= link_to zone_item_groups_zone_groups_path(zone: zone.id, project: @project.id, group: item_group.id) do %>
+            
+              <%= item_group.title %>
+            
+          <% end %>
+          </div>
+        <% end %>
+      </div>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- END MODAL -->
+  </div>
+</div>
+  <table class="client-table">
+    <thead>
+      <th></th>
+      <th>Zone Groups</th>
+      <th>Zone Items</th>
+      <th>Estimated Cost</th>
+      <th>Note</th>
+      <th>Additional Quote</th>
+      <th>Help</th>
+    </thead>
+  <!-- Show all item groups at all times -->
+  <% @zone_items = ZoneItemGroup.where(project_id: @project.id).where(zone_id: zone.id).all %>
+  <% @zone_items.each do |zone_item| %>
+
+    <!-- Find all items that belong to the item group
+    and that have the category which matches the project -->
+    <% @items = Item.where(item_group_id: zone_item.item_group.id).where(category_id: @project.category_id).where(user_uploaded: [nil, false]).all.order("cost DESC") %>
+
+    <!-- Find items that don't belong to the same category -->
+     <% @other_items = Item.where(item_group_id: zone_item.item_group.id).where.not(category_id: @project.category_id).all.order("cost DESC") %>
+
+    <!-- Find all variation items that belong to the item group
+    including those that fall outside of the projects category -->
+    <% @variation_items = Item.where(item_group_id: zone_item.item_group.id).all %>
+
+    <!-- If there are items that have already been selected 
+    and belong to the project, find them here -->
+    <% @pitem = ProjectItem.where(project_id: @project.id).where(zone_item_group_id: zone_item.id).last %>
+      <% if @pitem.present? %>
+        <%= render 'projects/project_table_rows_present', zone_item: zone_item, project: @project, items: @items, zone: zone %>
+      <% else %>
+        <%= render 'projects/project_table_rows', zone_item: zone_item, project: @project, items: @items, zone: zone %>
+      <% end %>
+    <% end %>
+    
+  </table>
+<%  end %>
+
+      
+          
+
+
+
+
+
+
+
+

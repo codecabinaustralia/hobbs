@@ -1,0 +1,61 @@
+<h4><i class="fa fa-comments" style="color: #798087;"></i> Talk to your project manager</h4>
+ <div class="grid-x" style="margin-bottom: 20px;">
+  <div class="cell small-12">
+    <%= render 'posts/form', post: @post %>
+  </div>
+</div>
+
+<% @posts.each do |post| %>
+    <% @post_replies = PostReply.where(post_id: post.id).all %>
+    <div class="grid-x">
+      <div class="cell small-12">
+        <div class="grid-x">
+        <% if post.user_id == current_user.id %>
+
+
+            <div class="cell small-10 my-msg">
+              <%= post.content.html_safe  %><br />
+              <small><%= time_ago_in_words(post.created_at) %> ago</small>
+            </div>
+            <div class="cell small-2 text-left">
+              <div class="my-msg-avatar">
+                <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg">
+              </div>
+            </div>
+
+            <div class="cell small-10">
+              <% @post_replies.each do |post_reply| %>
+                <div class="post-reply-container">
+                  <%= post_reply.content %><br /><br />
+                  <span style="color: #5a6168;"><%= time_ago_in_words(post_reply.created_at) %> ago by <i class="fa fa-user"></i> <%= post_reply.user.email %></span>
+                </div>
+              <% end %>
+              <%= render 'post_replies/form', post_reply: @post_reply, post: post %>
+            </div>
+        <% else %>
+
+            <div class="cell small-2 text-right">
+              <div class="your-msg-avatar">
+                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg">
+              </div>
+            </div>
+            <div class="cell small-10  your-msg">
+              <%= post.content %><br />
+              <small><%= time_ago_in_words(post.created_at) %> ago</small>
+            </div>
+            
+            <div class="cell small-10 small-offset-2">
+              <% @post_replies.each do |post_reply| %>
+                <div class="post-reply-container">
+                  <%= post_reply.content %><br /><br />
+                  <span style="color: #5a6168;"><%= time_ago_in_words(post_reply.created_at) %> ago by <i class="fa fa-user"></i> <%= post_reply.user.email %></span> 
+                </div>
+              <% end %>
+              <%= render 'post_replies/form', post_reply: @post_reply, post: post %>
+            </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+
+<% end %>

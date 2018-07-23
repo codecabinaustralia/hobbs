@@ -1,0 +1,125 @@
+<table>
+ 
+
+
+
+                <tr class="variation-request">
+                  <td colspan="2">
+                    <small> Variation Quote Approved: <%= zone_item.item_group.title.capitalize %></small>
+                  </td>
+
+              <% else %>
+                <tr class="variation-received-solid">
+                  <td colspan="2">
+                    <small> Variation Quote Received: <%= zone_item.item_group.title.capitalize %></small>
+                  </td>
+              <% end %>
+
+
+
+              <td colspan="2">
+                <%= @myvariations.item.title %>
+              </td>
+              <td>
+                <% if @myvariations.approved? %>
+                <span class="label success">VARIATION APPROVED</span>
+                <% else %>
+                <span class="label primary">QUOTE RECEIVED</span>
+                <% end %>
+              </td>
+              <td>
+                <%= number_to_currency(@myvariations.price, precission: 2) %>
+              </td>
+              <td>
+                <% if @myvariations.approved != true %>
+                  <!-- If not approved yet, show approve button -->
+                  <%= link_to "APPROVE QUOTE", variation_variation_approve_path(@myvariations.id),  class: "button success expanded" %>
+                  <%= link_to 'CANCEL REQUEST', @myvariations, method: :delete, data: { confirm: 'Are you sure?' },class: "button warning expanded" %>
+                <% else %>
+                  <!-- Otherwise show the approved label -->
+                  <div class="quote-approval">
+                    <strong>APPROVED</strong>
+                  </div>
+                <% end %>
+              </td>
+            </tr>
+              
+            <% else %>
+            <tr class="variation-request">
+              <td colspan="6">
+                <i>At this stage you may choose to request a variation. Pleasenote that this will trigger a quote response and may result in additional costs.</i>
+              </td>
+              <td>
+                <div class="button primary expanded" data-open="variation_modal_<%= @pitem.id %>">
+                  Request a variation
+                </div>
+                <div class="reveal full" id="variation_modal_<%= @pitem.id %>" data-reveal data-v-offset="0">
+
+                    <%= render 'projects/variations_form', variation: @variation, variation_items: @variation_items, project_item: @pitem.id %>
+
+                    <button class="close-button" data-close aria-label="Close modal" type="button">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div> 
+              </td>
+            </tr>
+            <% end %>
+          
+          <% else %>
+          <tr class="quote-received">
+            <td colspan="2">
+              <span class="label primary">Quote Received: Needs approval</span>
+            </td>
+          <% end %>          
+
+        
+          <% if @pitem.quote_approved != true %>
+            <td colspan="2">
+              <h4>Additional cost for this item: <%= number_to_currency(@pitem.quote_total) %></h4> 
+            </td>
+            <td colspan="3">
+              <div class="button-group float-right">
+                <%= link_to "APPROVE QUOTE", project_project_item_approve_path(@project.id, :project_item => @pitem.id), class: "button success", style: "margin-bottom: 0"%>
+                <% if @pitem.discussion_raised != true %>
+                <div class="button alert" data-open="discuss_quote_<%= @pitem.id %>">
+                  DISCUSS QUOTE
+                </div>
+              </div>
+                <% end %>
+              <div class="reveal" id="discuss_quote_<%= @pitem.id %>" data-reveal>
+                <h1>Leave a message here</h1>
+                <%= form_for @pitem, url: project_project_item_discuss_path(@project) do |f| %>
+                  <%= f.text_area :quote_note, value: nil %>
+                  <%= f.hidden_field :item_id, value: @pitem.id %>
+                  <%= f.submit "Engage Discussion", class: "button success" %>
+                <% end %>
+                <button class="close-button" data-close aria-label="Close modal" type="button">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </td>
+          <% end %>
+          
+      <% end %>
+    </tr>
+    </table>
+    
+      
+      <div class="reveal" id="my_note_<%= @pitem.item.id %>" data-reveal>
+        <h1>You can leave a commment here.</h1>
+        <% if @pitem.quote_total.blank? %>
+          <%= form_for @pitem, url: project_project_item_comment_path(@project.id) do |f| %>
+            <%= f.text_area :quote_note %>
+            <%= f.hidden_field :item_id, value: @pitem.id %>
+            <%= f.submit "Submit Comment", class: "button small success" %>
+          <% end %>
+        <% end %>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+
+
+
+      

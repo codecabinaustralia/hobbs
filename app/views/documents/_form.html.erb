@@ -1,0 +1,17 @@
+<%= form_for @document do |form| %>
+  <div class="field">
+    <%= form.file_field :file, direct_upload: true %>
+  </div>
+
+  <div class="field">
+    <%= form.text_field :title, placeholder: "Add a title for your document" %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :project_id, value: @project.id %>
+  </div>
+
+  <div class="text-right">  
+    <%= form.submit "Upload Document", class: "button success" %>
+  </div>
+<% end %>

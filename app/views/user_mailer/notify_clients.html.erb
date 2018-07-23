@@ -1,0 +1,17 @@
+<div style="background-color: #001131; padding: 50px 0;">
+	<div style="width: 100%; text-align: center; margin-top: 50px;">
+		<img src="http://res.cloudinary.com/theblackandwhites/image/upload/v1521614664/Logo_and95g.png" width="250">
+	</div>
+	<div style="width: 600px; background-color: #fff; padding: 40px; margin: auto; margin-top: 50px; margin-bottom: 50px; text-align: center;">
+
+		<h2>Hi <%= @client.email %></h2>
+		<p>Please see below a message from your project manager, <%= (@message.user.first_name).capitalize %>.</p>
+
+		<div style="padding: 20px; background-color: #f5f5f5; border: 1px solid #ccc; margin: 40px 0;">
+			<i><%= @message.body %></i>
+		</div>
+
+		<div style="text-align: center;"><%= link_to "View Project", project_url(@message.project_id), style: "background-color: #22bb5b; border-radius: 5px; padding: 10px 40px; color: #fff; font-size: 18px; font-weight: bold; text-decoraton:none" %></div>
+
+	</div>
+</div>

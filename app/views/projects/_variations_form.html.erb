@@ -1,0 +1,74 @@
+<div class="grid-container">
+    <% @variation_items.each do |item| %>
+        <% @item_attributes = ItemAttribute.where(item_id: item.id).all %>
+        <div class="grid-x grid-margin-x grid-margin-y" style="margin-bottom: 10px;">
+          <div class="cell small-12 medium-3">
+            <img src="http://www.mbvision.it/huninthesun/wp-content/uploads/2015/04/placeholder-600x400.png" width="100%">
+          </div>
+          <div class="cell small-12 medium-6">
+            <div>
+              <%= item.title %><br />
+              <small>SKU: <%= item.item_code %></small>
+            </div>
+            <div class="modal-item-description">
+              <%= item.description %>
+            </div>
+          </div>
+          <div class="cell small-12 medium-3">
+            <% if @item_attributes.present? %>
+              <div class="button success expanded" id="item_attribute_button_<%= item.id %>">
+                Choose an attribute
+              </div>
+            <% else %>
+              <%= form_for @variation, url: variations_path do |form| %>
+                      <%= form.hidden_field :item_id, value: item.id, class: "variation_item_form" %>
+                      <%= form.hidden_field :project_id, value: @project.id %>
+                      <%= form.hidden_field :project_item_id, value: @pitem.id %>
+                      <%= form.hidden_field :item_attribute_id, value: nil %>
+                      <%= form.submit "Request a quote", class: "button success expanded", style: "margin-top: 20px" %>
+                    <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        
+        
+        <div class="item_attribute_row" id="item_attribute_<%= item.id %>" style="margin-bottom: 20px;">
+          <table>
+            <thead>
+              <th width="10%">Images</th>
+              <th width="30%">Attribute</th>
+              <th width="20%">Item Title</th>
+              <th width="10%">Item Code</th>
+              <th width="30%"></th>
+            </thead>
+            <tbody>
+              <% @item_attributes.each do |item_attribute| %>
+              <tr>
+                <td></td>
+                <td><%= item_attribute.title %></td>
+                <td><%= item.title %></td>
+                <td><%= item_attribute.item_code %></td>
+                <td>
+                  <!-- Check for attributes -->
+                  <% @item_attributes = ItemAttribute.where(item_id: item.id).all %>
+                  
+                    <%= form_for @variation, url: variations_path do |form| %>
+                      <%= form.hidden_field :item_id, value: item.id, class: "variation_item_form" %>
+                      <%= form.hidden_field :project_id, value: @project.id %>
+                      <%= form.hidden_field :project_item_id, value: @pitem.id %>
+                      <%= form.hidden_field :item_attribute_id, value: item_attribute.id %>
+                      <%= form.submit "Request a quote", class: "button success expanded", style: "margin-top: 20px" %>
+                    <% end %>
+                
+
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          
+        </div>
+
+    <% end %>
+</div>

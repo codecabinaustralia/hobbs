@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_item: one
+  price: 9.99
+  approved: false
+  project: one
+
+two:
+  project_item: two
+  price: 9.99
+  approved: false
+  project: two

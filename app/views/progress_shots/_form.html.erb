@@ -1,0 +1,22 @@
+<%= form_for @progress_shot do |form| %>
+
+  <div class="field">
+    <%= form.file_field :image, direct_upload: true %>
+  </div>
+
+  <div class="field">
+    <%= form.text_field :title, placeholder: "Enter a title" %>
+  </div>
+
+  <div class="field">
+    <%= form.text_area :description, placeholder: "Progress description" %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :project_id, value: @project.id %>
+  </div>
+
+  <div class="text-right">
+    <%= form.submit "Add Progress Shot", class: "button success" %>
+  </div>
+<% end %>
