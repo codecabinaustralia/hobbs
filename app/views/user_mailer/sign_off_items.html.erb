@@ -1,0 +1,14 @@
+<div style="background-color: #001131; padding: 50px 0;">
+	<div style="width: 100%; text-align: center; margin-top: 50px;">
+		<img src="http://res.cloudinary.com/theblackandwhites/image/upload/v1521614664/Logo_and95g.png" width="250">
+	</div>
+	<div style="width: 600px; background-color: #fff; padding: 40px; margin: auto; margin-top: 50px; margin-bottom: 50px; text-align: center;">
+
+		<h2>Project Stage 1 Complete</h2>
+		<h4>Sign off for Project "<strong><%= @project.title %></strong>" Stage 1 has been completed.</h4>
+
+		<p>The next steps are to quote each item. Once you have entered a quote for each item you can press the blue button above the table that reads "". This will notify your clients of any changes to your quote sheet.</p>
+
+		<div style="text-align: center;"><%= link_to "Start Quoting", project_url(@project.id, :quote_stage => true), style: "background-color: #22bb5b; border-radius: 5px; padding: 10px 40px; color: #fff; font-size: 18px; font-weight: bold; text-decoraton:none" %></div>
+	</div>
+</div>

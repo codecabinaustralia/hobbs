@@ -2,9 +2,19 @@
   <div class="grid-container">
     <div class="grid-x">
       <div class="cell small-12">
-<h1>Item Groups</h1>
+      
+      <div class="grid-x">
+          <div class="cell small-12 medium-9">
+            <h1>Zone Groups</h1>
+            <p class="lead">We pre-build zone groups and assign them to a zone when you set up your new project. Zone groups are things like walls, benches, floors, cabinets, lights etc.</p>
+          </div>
+          <div class="cell small-12 medium-3 text-right" style="padding-top: 60px;">
+            <%= link_to "Add New Zone Group", new_item_group_path, class: "button success large" %>
+          </div>
+        </div>
+        
 
-<table>
+<table style="margin-top: 20px;">
   <thead>
     <tr>
       <th>Title</th>

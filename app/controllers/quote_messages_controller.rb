@@ -44,7 +44,7 @@ class QuoteMessagesController < ApplicationController
           UserMailer.notify_clients(@client, @message).deliver
         end
 
-        format.html { redirect_to project_path(@quote_message.project_id), notice: 'Quote message was successfully created.' }
+        format.html { redirect_to project_path(@quote_message.project_id, :quote_stage => true), notice: 'Quote message was successfully created.' }
         format.json { render :show, status: :created, location: @quote_message }
       else
         format.html { render :new }

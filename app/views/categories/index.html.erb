@@ -2,9 +2,18 @@
   <div class="grid-container">
     <div class="grid-x">
       <div class="cell small-12">
-        <h1>Categories</h1>
-
-        <table>
+        
+        <div class="grid-x">
+          <div class="cell small-12 medium-9">
+            <h1>Categories</h1>
+            <p class="lead">Here you can set up as many categories as you like. Categories can be set house plans, gold, silver, bronze, packages or you might just set one category. <strong>Please note: you will have to create at least one category.</strong></p>
+          </div>
+          <div class="cell small-12 medium-3 text-right" style="padding-top: 60px;">
+            <%= link_to "Add New Category", new_category_path, class: "button success large" %>
+          </div>
+        </div>
+        
+        <table style="margin-top: 20px;">
           <thead>
             <tr>
               <th>Title</th>

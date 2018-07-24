@@ -32,6 +32,7 @@ class VariationsController < ApplicationController
             project_id: @variation.project_item.project_id
             )
           @post.save!
+
         else
           @post = Post.new(
             content: "VARIATION QUOTED - #{@variation.project_item.item.title} for #{@variation.project_item.item_group.title} in the #{@variation.project_item.zone.title} - Additional Cost $#{@variation.price}",
@@ -40,6 +41,13 @@ class VariationsController < ApplicationController
             )
           @post.save!
         end
+    @project = Project.find(@variation.project_id)
+    @user = ProjectUser.where(project_id: project_id).where(role: "owner").last
+    @client = ProjectUser.where(project_id: project_id).where(role: [nil, false]).last
+    @client = User.find(@client.client_id)
+
+    #SEND EMAIL
+    UserMailer.variation_request(@variation, @project, @client, @user).deliver
 
     redirect_to project_path(@variation.project_id, :quote_stage => true)
   end

@@ -95,7 +95,7 @@ Rails.application.configure do
 
 
     #Devise
-    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+    config.action_mailer.default_url_options = { host: 'http://hobbscodecabin.herokuapp.com', port: 3000 }
 
     #Email
     config.action_mailer.delivery_method = :smtp
@@ -111,14 +111,5 @@ Rails.application.configure do
   
   #Paperclip and AWS
 
-  config.paperclip_defaults = {
-    :storage => :s3,
-    :preserve_files => true,
-    :s3_credentials => {
-      :bucket => 'hobbs-building',
-      :access_key_id => 'AKIAIRC5MI3RMTID7MZA',
-      :secret_access_key => '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',
-      :s3_region => 'us-west-2'
-    }
-    }
+
 end

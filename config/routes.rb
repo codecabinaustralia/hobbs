@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :clients
   devise_for :users
 
   get 'static/home'

@@ -1,16 +1,24 @@
-<p id="notice"><%= notice %></p>
+<div class="grey-background">
+  <div class="grid-container">
+    <div class="grid-x">
+      <div class="cell small-12">
 
-<h1>Suppliers</h1>
+        <div class="grid-x">
+          <div class="cell small-12 medium-9">
+            <h1>Suppliers</h1>
+            <p class="lead">Here you can add all of your suppliers. We attached items to each of these suppliers so we can reference them for reporting purposes.</p>
+          </div>
+          <div class="cell small-12 medium-3 text-right" style="padding-top: 60px;">
+            <%= link_to "Add New Supplier", new_supplier_path, class: "button success large" %>
+          </div>
+        </div>
+        
 
-<table>
+<table style="margin-top: 20px;">
   <thead>
     <tr>
       <th>Logo</th>
       <th>Name</th>
-      <th>Address</th>
-      <th>Postcode</th>
-      <th>State</th>
-      <th>Country</th>
       <th>Website</th>
       <th>Email</th>
       <th>Phone</th>
@@ -28,10 +36,7 @@
           <% end %>
         </td>
         <td><%= supplier.name %></td>
-        <td><%= supplier.address %></td>
-        <td><%= supplier.postcode %></td>
-        <td><%= supplier.state %></td>
-        <td><%= supplier.country %></td>
+        
         <td><%= supplier.website %></td>
         <td><%= supplier.email %></td>
         <td><%= supplier.phone %></td>
@@ -44,6 +49,4 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Supplier', new_supplier_path %>
+</div></div></div></div>

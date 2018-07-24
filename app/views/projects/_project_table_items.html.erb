@@ -10,12 +10,12 @@
   </div>
   <div class="cell small-6 text-right">
     <div class="button success" data-open="zone_modal_<%= zone.id %>">
-      <i class="fa fa-plus-circle"></i> Add item group
+      <i class="fa fa-plus-circle"></i> Add zone group
     </div>  
 
-    <!-- Item Group Modal -->
+    <!-- Zone Group Modal -->
     <div class="reveal" id="zone_modal_<%= zone.id %>" data-reveal>
-      <h2>Add item groups to the <%= zone.title %></h2>
+      <h2>Add zone groups to the <%= zone.title %></h2>
       <div class="grid-x">
         <% @item_groups.each do |item_group| %>
         <div class="cell small-12 zone-item-rows">
@@ -38,7 +38,7 @@
     <thead>
       <th></th>
       <th>Zone Groups</th>
-      <th>Zone Items</th>
+      <th>Items</th>
       <th>Estimated Cost</th>
       <th>Note</th>
       <th>Additional Quote</th>

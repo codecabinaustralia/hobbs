@@ -2,7 +2,25 @@
   <div class="grid-container">
     <div class="grid-x">
       <div class="cell small-12">
-<h1>Projects</h1>
+
+        <div class="grid-x">
+          <div class="cell small-12 medium-9">
+            <h1>My Projects</h1>
+            <p class="lead">Here you can find all of you projects <%= link_to "Start a new project now.", new_project_path %> </p>
+            <ol>
+              <li>First Enter your project details</li>
+              <li>Add your zones to the project</li>
+              <li>Add zone groups to each zone</li>
+              <li>Invite your clients</li>
+            </ol>
+          </div>
+          <div class="cell small-12 medium-3 text-right" style="padding-top: 60px;">
+            <%= link_to "Add New Project", new_project_path, class: "button success large" %>
+          </div>
+        </div>
+        
+
+<table style="margin-top: 20px;">
 
 <table>
   <thead>

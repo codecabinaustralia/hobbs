@@ -1,0 +1,25 @@
+<div style="background-color: #001131; padding: 50px 0;">
+	<div style="width: 100%; text-align: center; margin-top: 50px;">
+		<img src="http://res.cloudinary.com/theblackandwhites/image/upload/v1521614664/Logo_and95g.png" width="250">
+	</div>
+	<div style="width: 600px; background-color: #fff; padding: 40px; margin: auto; margin-top: 50px; margin-bottom: 50px; text-align: center;">
+
+		<h2>Variation request for <%= @project.title %></h2>
+		<h4><%= client.first_name %> has requested a variation</h4>
+
+		<table>
+			<tr>
+				<td>Variation</td>
+				<td>
+					<%= @variation.project_item.item.title %><br />
+					<strong><%= @variation.item_attribute_id.presence? %></strong>	
+				</td>
+			</tr>
+		</table>
+
+		<p>You will need to quote on this variation. To do so simply click on the button below and we'll take you to the quote table. From there you should see an orange bar, you can add any extra costs here.</p>
+
+		<div style="text-align: center;"><%= link_to "Start Quoting", project_url(@message.project_id, :quote_stage => true), style: "background-color: #22bb5b; border-radius: 5px; padding: 10px 40px; color: #fff; font-size: 18px; font-weight: bold; text-decoraton:none" %></div>
+
+	</div>
+</div>

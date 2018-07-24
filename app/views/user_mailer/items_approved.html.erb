@@ -1,0 +1,15 @@
+<div style="background-color: #001131; padding: 50px 0;">
+	<div style="width: 100%; text-align: center; margin-top: 50px;">
+		<img src="http://res.cloudinary.com/theblackandwhites/image/upload/v1521614664/Logo_and95g.png" width="250">
+	</div>
+	<div style="width: 600px; background-color: #fff; padding: 40px; margin: auto; margin-top: 50px; margin-bottom: 50px; text-align: center;">
+
+		<h2>Item Approved - <%= @item.title %></h2>
+		
+
+		<p>This is a courtesy email to inform you that an item for prject <%= @project.title %> has been approved.</p><br />
+
+		<div style="text-align: center;"><%= link_to "View Project", project_url(@project.id, :quote_stage => true), style: "background-color: #22bb5b; border-radius: 5px; padding: 10px 40px; color: #fff; font-size: 18px; font-weight: bold; text-decoraton:none" %></div>
+
+	</div>
+</div>

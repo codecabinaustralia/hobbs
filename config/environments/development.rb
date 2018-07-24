@@ -74,17 +74,7 @@ Rails.application.configure do
   :enable_starttls_auto => true
 }
 
-  #Paperclip 
 
-  config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => 'hobbs-building',
-      :access_key_id => 'AKIAIRC5MI3RMTID7MZA',
-      :secret_access_key => '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',
-      :s3_region => 'us-west-2'
-  }
-  }
 
   
 end

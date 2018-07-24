@@ -11,4 +11,35 @@ class UserMailer < ApplicationMailer
 
     mail to: @client.email, subject: "New Project Update"
   end
+
+  def sign_off_items(project, client, owner)
+    @client = client
+    @project = project
+    @owner = owner
+
+    mail to: @owner.email, subject: "#{@project.title} Stage 1 Complete"
+  end
+
+  def variation_request(user, variation, client, project)
+    @client = client
+    @project = project
+    @user = user
+    @variation = variation
+
+    mail to: @user.email, subject: "#{@project.title} Variation Request"
+  end
+
+  def items_added(owner, project)
+    @project = project
+    @owner = owner
+    mail to: @owner.email, subject: "#{@project.title} Items Added"
+  end
+
+  def items_approved(project, item, owner)
+    @project = project
+    @owner = owner
+    @item = item
+    mail to: @owner.email, subject: "Item Approved - #{@item.title}"
+  end
+
 end

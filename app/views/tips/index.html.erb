@@ -1,12 +1,24 @@
-<p id="notice"><%= notice %></p>
+<div class="grey-background">
+  <div class="grid-container">
+    <div class="grid-x">
+      <div class="cell small-12">
 
-<h1>Tips</h1>
+        <div class="grid-x">
+          <div class="cell small-12 medium-9">
+            <h1>Tips</h1>
+            <p class="lead">You can add a tip to a zone group. Tips help your clients through each step. They are currently text only, however we will be adding functionality so that you can upload videos and images.</p>
+          </div>
+          <div class="cell small-12 medium-3 text-right" style="padding-top: 60px;">
+            <%= link_to "Add New Tip", new_tip_path, class: "button success large" %>
+          </div>
+        </div>
+        
 
-<table>
+<table style="margin-top: 20px;">
   <thead>
     <tr>
       <th>Content</th>
-      <th>Item group</th>
+      <th>Zone group</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +27,7 @@
     <% @tips.each do |tip| %>
       <tr>
         <td><%= tip.content %></td>
-        <td><%= tip.item_group %></td>
+        <td><%= tip.item_group.title %></td>
         <td><%= link_to 'Show', tip %></td>
         <td><%= link_to 'Edit', edit_tip_path(tip) %></td>
         <td><%= link_to 'Destroy', tip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -24,6 +36,4 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Tip', new_tip_path %>
+</div></div></div></div>
