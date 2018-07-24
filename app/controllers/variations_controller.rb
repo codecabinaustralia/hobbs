@@ -43,14 +43,14 @@ class VariationsController < ApplicationController
         end
     @project = Project.find(@variation.project_id)
 
-    @owner = ProjectUser.where(project_id: @project.id).where(role: "owner").last
-    puts @owner.id
-    @owner = User.find(@owner.user_id)
-    @client = ProjectUser.where(project_id: @project.id).where(role: [nil, false]).last
-    @client = User.find(@client.user_id)
+    #@owner = ProjectUser.where(project_id: @project.id).where(role: "owner").last
+    #puts @owner.id
+    #@owner = User.find(@owner.user_id)
+    #@client = ProjectUser.where(project_id: @project.id).where(role: [nil, false]).last
+    #@client = User.find(@client.user_id)
 
     #SEND EMAIL
-    UserMailer.variation_request(@owner, @variation, @client, @project).deliver
+    #UserMailer.variation_request(@owner, @variation, @client, @project).deliver
 
     redirect_to project_path(@variation.project_id, :quote_stage => true)
   end

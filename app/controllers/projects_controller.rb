@@ -194,10 +194,10 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project_id])
     @project.update_attributes(confirmed: true)
 
-    @owner = ProjectUser.where(project_id: @project.id).where(role: "owner").last
-    @owner = User.find(@owner.user_id)
-    @client = ProjectUser.where(project_id: @project.id).where(role: [nil, false]).last
-    @client = User.find(@client.user_id)
+    #@owner = ProjectUser.where(project_id: @project.id).where(role: "owner").last
+    #@owner = User.find(@owner.user_id)
+    #@client = ProjectUser.where(project_id: @project.id).where(role: [nil, false]).last
+    #@client = User.find(@client.user_id)
 
     @post = Post.new(
       content: "#{(@project.title).upcase} - SIGNED OFF (STAGE 1)",
@@ -207,7 +207,7 @@ class ProjectsController < ApplicationController
     @post.save!
 
     #SEND EMAIL
-    UserMailer.sign_off_items(@project, @client, @owner).deliver
+    #UserMailer.sign_off_items(@project, @client, @owner).deliver
 
     redirect_to project_path(params[:project_id])
 

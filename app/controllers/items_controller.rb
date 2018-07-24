@@ -34,8 +34,6 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
 
-        @item_attribute = ItemAttribute.where(item_id: @item.id).last
-        @item_attribute.attach(params[:image])
         
         if @item.user_uploaded.present?
           @item_project = ProjectItem.new(

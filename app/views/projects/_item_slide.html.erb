@@ -131,13 +131,13 @@
 
 
 <div class="grid-container">
-    <% @other_items.each do |item| %>
-        <% @item_attributes = ItemAttribute.where(item_id: item.id).all %>
+    <% @other_items.each do |o_item| %>
+        <% @item_attributes = ItemAttribute.where(item_id: o_item.id).all %>
         <div class="grid-x grid-margin-x grid-margin-y item-slide-container">
           <div class="cell small-12 medium-3 item-slide-image">
 
 
-              <% item.files.first(1).each do |file| %>
+              <% o_item.files.first(1).each do |file| %>
                   <div>
                   <%= image_tag file, :size => "400x400", :crop => :fill %>
                   </div> 
@@ -147,10 +147,10 @@
           </div>
           <div class="cell small-12 medium-6">
             <div>
-              <h2><%= item.title %></h2>
-              <small>SKU: <%= item.item_code %></small><br />
-              <% if item.supplier.present? %>
-              <% @supplier = Supplier.find(item.supplier_id) %>
+              <h2><%= o_item.title %></h2>
+              <small>SKU: <%= o_item.item_code %></small><br />
+              <% if o_item.supplier.present? %>
+              <% @supplier = Supplier.find(o_item.supplier_id) %>
                 <% if @supplier.logo.attached? %>
                 <div class="grid-x">
                   <div class="cell shrink">
@@ -164,7 +164,7 @@
               <% end %>
             </div>
             <div class="item-slide-container-description">
-              <%= item.description %>
+              <%= o_item.description %>
             </div>
           </div>
           <div class="cell small-12 medium-3">
@@ -172,7 +172,7 @@
               <div class="item-slide-attribute-text">
                 <i class="fa fa-exclamation-circle"></i> This item has child attributes attached, to view these simply click the button below to see a tableof all available attributes.
               </div>
-              <div class="button success expanded" id="item_attribute_button_<%= item.id %>">
+              <div class="button success expanded" id="item_attribute_button_<%= o_item.id %>">
                 Choose an attribute
               </div>
             <% else %>
@@ -182,19 +182,19 @@
                 <%= hidden_field_tag :zone_item_group_id, zone_item.id %>
                 <%= hidden_field_tag :category_id, @project.category_id %>
                 <%= hidden_field_tag :item_group_id, zone_item.item_group.id %>
-                <%= hidden_field_tag :item_id, item.id %>
+                <%= hidden_field_tag :item_id, o_item.id %>
                 <%= submit_tag "Add Item", class: "button success expanded", style: "margin-top: 20px" %>
               <% end %>
             <% end %>
           </div>
           <script>
-            $( "#item_attribute_button_<%= item.id %>" ).click(function() {
-              $( "#item_attribute_<%= item.id %>" ).slideToggle( "slow", function() {
+            $( "#item_attribute_button_<%= o_item.id %>" ).click(function() {
+              $( "#item_attribute_<%= o_item.id %>" ).slideToggle( "slow", function() {
               });
             });
           </script>
           <div class="cell small-12">
-            <div class="item_attribute_row" id="item_attribute_<%= item.id %>" style="margin-bottom: 20px;">
+            <div class="item_attribute_row" id="item_attribute_<%= o_item.id %>" style="margin-bottom: 20px;">
               <table>
                 <thead>
                   <th width="20%">Images</th>
@@ -214,11 +214,11 @@
                       <% end %>
                     </td>
                     <td><%= item_attribute.title %></td>
-                    <td><%= item.title %></td>
+                    <td><%= o_item.title %></td>
                     <td><%= item_attribute.item_code %></td>
                     <td>
                       <!-- Check for attributes -->
-                      <% @item_attributes = ItemAttribute.where(item_id: item.id).all %>
+                      <% @item_attributes = ItemAttribute.where(item_id: o_item.id).all %>
                       
                         <%= form_tag project_project_item_path(@project.id) do %>
                           <%= hidden_field_tag :project_id, @project.id %>
