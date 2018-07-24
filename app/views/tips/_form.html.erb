@@ -12,18 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <h3>Assign this tip to a zone group</h3>
+    <%= form.collection_select(:item_group_id, ItemGroup.all,
+                  :id, :title,
+                 {:prompt => 'Select a zones group'})%>
   </div>
 
   <div class="field">
-    <%= form.label :item_group_id %>
-    <%= form.collection_select(:item_group_id, ItemGroup.all,
-                  :id, :title,
-                 {:prompt => 'Select an item group'})%>
+    <%= form.text_area :content, placeholder: "Write your tip here" %>
   </div>
 
+  
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit tip", class: "button success expanded large" %>
   </div>
 <% end %>

@@ -30,7 +30,7 @@
   <tbody>
     <% @suppliers.each do |supplier| %>
       <tr>
-        <td>
+        <td width="100">
           <% if supplier.logo.attached?%>
             <%= image_tag supplier.logo, :size => "150x80", :crop => :fill %>
           <% end %>
@@ -41,9 +41,9 @@
         <td><%= supplier.email %></td>
         <td><%= supplier.phone %></td>
         <td><%= supplier.contact_name %></td>
-        <td><%= link_to 'Show', supplier %></td>
-        <td><%= link_to 'Edit', edit_supplier_path(supplier) %></td>
-        <td><%= link_to 'Destroy', supplier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', supplier, class: "button primary" %></td>
+        <td><%= link_to 'Edit', edit_supplier_path(supplier), class: "button warning" %></td>
+        <td><%= link_to 'Destroy', supplier, method: :delete, class: "button alert", data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

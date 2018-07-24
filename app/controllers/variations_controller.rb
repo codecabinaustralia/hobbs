@@ -42,12 +42,15 @@ class VariationsController < ApplicationController
           @post.save!
         end
     @project = Project.find(@variation.project_id)
-    @user = ProjectUser.where(project_id: project_id).where(role: "owner").last
-    @client = ProjectUser.where(project_id: project_id).where(role: [nil, false]).last
-    @client = User.find(@client.client_id)
+
+    @owner = ProjectUser.where(project_id: @project.id).where(role: "owner").last
+    puts @owner.id
+    @owner = User.find(@owner.user_id)
+    @client = ProjectUser.where(project_id: @project.id).where(role: [nil, false]).last
+    @client = User.find(@client.user_id)
 
     #SEND EMAIL
-    UserMailer.variation_request(@variation, @project, @client, @user).deliver
+    UserMailer.variation_request(@owner, @variation, @client, @project).deliver
 
     redirect_to project_path(@variation.project_id, :quote_stage => true)
   end
@@ -71,6 +74,9 @@ class VariationsController < ApplicationController
             )
           @post.save!
         end
+
+    @project_item = ProjectItem.find(@variation.project_item_id)
+        @project_item.update_attributes(variation_requested: true)
 
     redirect_to project_path(@variation.project_id)
   end
@@ -98,6 +104,9 @@ class VariationsController < ApplicationController
 
     respond_to do |format|
       if @variation.save
+
+        
+
         format.html { redirect_to project_path(@variation.project_id), notice: 'Variation was successfully created.' }
         format.json { render :show, status: :created, location: @variation }
       else
@@ -141,6 +150,9 @@ class VariationsController < ApplicationController
             )
           @post.save!
         end
+
+        @project_item = ProjectItem.find(@variation.project_item_id)
+        @project_item.update_attributes(variation_requested: false)
 
     redirect_back(fallback_location: root_path)
   end

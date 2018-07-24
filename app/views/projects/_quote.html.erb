@@ -3,7 +3,8 @@
 
               <!-- Category Based -->
                 <% if @project.base_price != nil %>
-                <% @all_approved_items = ProjectItem.where(project_id: @project.id).where(quote_approved: true).all %>
+                <% @all_approved_items = ProjectItem.where(project_id: @project.id).where(quote_approved: true).where(variation_requested: [false,nil]).all %>
+                <% @approved_items = ProjectItem.where(project_id: @project.id).where(quote_approved: true).all %>
                 <% @sum_of_items = @all_approved_items.sum(:quote_total) %>
                 <% @variations = Variation.where(project_id: @project.id).where(approved: true).all %>
                   <% @sum_of_variations = @variations.sum(:price) %>
@@ -11,12 +12,17 @@
                   <div class="button primary" data-open="breakdown_quote">Get Breakdown</div><br />
 
                   <div class="reveal" id="breakdown_quote" data-reveal>
-                    <h1>Quote breakdown</h1>
+                    <h1>Quote breakdowns</h1>
                     <table>
-                      <% @all_approved_items.each do |p_item| %>
+                      <% @approved_items.each do |p_item| %>
                       <tr>
+
                         <td>
+                          <% if p_item.variation_requested == true %>
+                          <del><%= p_item.item.title %></del>
+                          <% else %>
                           <%= p_item.item.title %>
+                          <% end %>
                         </td>
       
                         <td class="text-right">

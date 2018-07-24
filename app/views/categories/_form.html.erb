@@ -12,16 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, placeholder: "Give your category a title" %>
   </div>
 
   <div class="field">
-    <%= form.label :color %>
-    <%= form.text_field :color, class: "colorwheel" %>
+    
+    <%= form.text_field :color, class: "colorwheel", placeholder: "Add a color" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit Category", class: "button success large expanded" %>
   </div>
 <% end %>

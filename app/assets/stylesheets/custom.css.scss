@@ -22,6 +22,17 @@ del{
 	padding: 20px;
 }
 
+.grey-background-form{
+	background-color: #e5e5e5;
+	padding: 20px 0;
+	min-height: 100vh;
+}
+
+.grey-background-form .inner-container{
+	background-color: #fff;
+	padding: 20px;
+}
+
 /* Button */
 .button, .button-group{
 	margin-bottom: 0 !important;
@@ -281,4 +292,117 @@ td{
 	margin-right: 20px;
 	border: 2px dashed #39BA82;
 	cursor: pointer;
+}
+
+.grey-background-form form{
+	margin-top: 40px;
+}
+
+.grey-background-form h1{
+	font-size: 30px;
+	font-weight: 700;
+	letter-spacing: -1px;
+	color: #29353D;
+}
+
+.grey-background-form h3{
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: -1px;
+	color: #29353D;
+	margin-bottom: 20px !important;
+	margin-top: 20px !important;
+}
+
+.grey-background-form .dollar{
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: -1px;
+	color: #29353D;
+
+}
+
+.grey-background-form input[type="submit"]{
+	margin-top: 40px;
+}
+
+input[type="text"]{
+	height: 50px;
+	font-size: 20px;
+	border: none;
+	border-bottom: 4px solid #ccc;
+	box-shadow: none;
+}
+
+input[type="text"]:focus{
+	border: none;
+	border-bottom: 4px solid #19935c;
+}
+
+td input[type="text"]{
+	height: 48px;
+	font-size: 20px;
+	border: none;
+	border-bottom: 4px solid #ccc;
+	box-shadow: none;
+}
+
+td input[type="text"]:focus{
+	border: none;
+	border-bottom: 4px solid #19935c;
+}
+
+textarea{
+	height: 150px !important;
+	font-size: 20px !important;
+	border: none !important;
+	border-bottom: 4px solid #ccc !important;
+	box-shadow: none !important;
+}
+
+textarea:focus{
+	border: none !important;
+	border-bottom: 4px solid #19935c !important;
+}
+
+select{
+	height: 50px;
+	font-size: 20px;
+	border: none;
+	border-bottom: 4px solid #ccc;
+	box-shadow: none;
+}
+
+
+
+select:focus{
+	border: none;
+	border-bottom: 4px solid #19935c;
+}
+
+.minicolors-theme-default .minicolors-input{
+	height: 50px !important;
+	font-size: 20px;
+	border: none;
+	border-bottom: 4px solid #ccc;
+	padding-left: 56px !important;
+
+}
+
+.minicolors-theme-default .minicolors-input:focus{
+	border: none;
+	border-bottom: 4px solid #19935c;
+}
+
+.minicolors-theme-default .minicolors-swatch {
+    top: 10px !important;
+    left: 10px !important;
+    width: 28px !important;
+    height: 28px !important;
+}
+
+.table-img img{
+	width: 80px !important;
+	height: 80px !important;
+	border-radius: 5px;
 }

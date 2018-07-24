@@ -12,16 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_field :title, placeholder: "Give your zone item a title" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit Zone Item", class: "button success large expanded" %>
   </div>
 <% end %>

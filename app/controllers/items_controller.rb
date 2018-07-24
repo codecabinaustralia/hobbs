@@ -33,6 +33,10 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
+
+        @item_attribute = ItemAttribute.where(item_id: @item.id).last
+        @item_attribute.attach(params[:image])
+        
         if @item.user_uploaded.present?
           @item_project = ProjectItem.new(
               project_id: @item.project_id,
@@ -45,7 +49,7 @@ class ItemsController < ApplicationController
           @item_project.save!           
         end
 
-        format.html { redirect_to project_path(@item.project_id), notice: 'Item was successfully created.' }
+        format.html { redirect_to tips_path, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new }
@@ -94,7 +98,7 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:title, :description, :brand, :category_id, :item_group_id, :cost, :unit_label, :item_code, :user_id, :user_uploaded, :user_item_location, :user_item_storename, :project_id, :zone_id,:zone_item_group_id, :supplier_id, files:[], item_attributes_attributes: [:id, :item_code, :title, :_destroy, images:[]])
+      params.require(:item).permit(:title, :description, :brand, :category_id, :item_group_id, :cost, :unit_label, :item_code, :user_id, :user_uploaded, :user_item_location, :user_item_storename, :project_id, :zone_id,:zone_item_group_id, :supplier_id, files:[], item_attributes_attributes: [:id, :item_code, :title, :_destroy, :image])
   
     end
 end

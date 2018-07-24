@@ -17,7 +17,7 @@
 <table style="margin-top: 20px;">
   <thead>
     <tr>
-      <th>Content</th>
+      <th width="60%">Content</th>
       <th>Zone group</th>
       <th colspan="3"></th>
     </tr>
@@ -28,9 +28,9 @@
       <tr>
         <td><%= tip.content %></td>
         <td><%= tip.item_group.title %></td>
-        <td><%= link_to 'Show', tip %></td>
-        <td><%= link_to 'Edit', edit_tip_path(tip) %></td>
-        <td><%= link_to 'Destroy', tip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', tip, class: "button primary" %></td>
+        <td><%= link_to 'Edit', edit_tip_path(tip), class: "button warning" %></td>
+        <td><%= link_to 'Destroy', tip, method: :delete, class: "button alert", data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

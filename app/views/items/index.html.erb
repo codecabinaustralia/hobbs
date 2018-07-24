@@ -17,6 +17,7 @@
 <table style="margin-top: 20px;">
   <thead>
     <tr>
+      <th>Image</th>
       <th>Title</th>
       <th>Description</th>
       <th>Brand</th>
@@ -28,14 +29,19 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
+        <td class="table-img">
+          <% item.files.first(1).each do |file| %>
+              <%= image_tag file, :size => "80x80", :crop => :fill %>
+          <% end %>
+        </td>
         <td><%= item.title %></td>
         <td><%= item.description %></td>
         <td><%= item.brand %></td>
         <td><%= item.category.title %></td>
 
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', item, class: "button primary" %></td>
+        <td><%= link_to 'Edit', edit_item_path(item), class: "button warning" %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, class: "button alert", data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

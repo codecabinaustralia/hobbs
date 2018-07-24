@@ -44,9 +44,9 @@
         <td><%= project.city %></td>
         <td><%= project.state %></td>
         <td><%= project.postcode %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', project, class: "button primary" %></td>
+        <td><%= link_to 'Edit', edit_project_path(project), class: "button warning" %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, class: "button alert", data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

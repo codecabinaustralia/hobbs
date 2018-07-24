@@ -1,6 +1,17 @@
-<h1>Editing Supplier</h1>
-
-<%= render 'form', supplier: @supplier %>
-
-<%= link_to 'Show', @supplier %> |
-<%= link_to 'Back', suppliers_path %>
+<div class="grey-background-form">
+	<div class="grid-container">
+		<div class="grid-x">
+		 	<div class="cell small-12 medium-6 medium-offset-3">
+		 		<div class="inner-container">
+				<h1>Edit supplier</h1>
+				<div class="image-preview">
+					<% if @supplier.logo.attached?%>
+					  <%= image_tag @supplier.logo, :size => "150x80", :crop => :fill %>
+					<% end %>
+				</div>
+				<%= render 'form', supplier: @supplier %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

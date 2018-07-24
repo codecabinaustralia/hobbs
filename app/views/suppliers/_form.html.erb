@@ -11,58 +11,59 @@
     </div>
   <% end %>
   
-  
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-12 medium-12">
+      <%= form.text_field :name, placeholder: "Supplier name" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :logo %>
-    <%= form.file_field :logo, direct_upload: true %>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-12 medium-12">
+      <h3>Upload a logo</h3>
+      <%= form.file_field :logo, direct_upload: true %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-12 medium-12">
+      <%= form.text_field :address, placeholder: "Enter primary address" %>
+    </div>
+    <div class="cell small-12 medium-3">
+      <%= form.text_field :postcode, placeholder: "Postcode" %>
+    </div>
+    <div class="cell small-12 medium-3">
+      <%= form.text_field :state, placeholder: "State" %>
+    </div>
+    <div class="cell small-12 medium-6">
+      <%= form.text_field :country, placeholder: "Country" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :postcode %>
-    <%= form.text_field :postcode %>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-12 medium-12">
+      <%= form.text_field :website, placeholder: "Website www." %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state %>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-12 medium-12">
+      <%= form.text_field :email, placeholder: "Email address" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :country %>
-    <%= form.text_field :country %>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-12 medium-12">
+      <%= form.text_field :phone, placeholder: "Phone number" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :website %>
-    <%= form.text_field :website %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :contact_name %>
-    <%= form.text_field :contact_name %>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-12 medium-12">
+      <%= form.text_field :contact_name, placeholder: "Do you have a contact name?" %>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit Supplier", class: "button expanded success large" %>
   </div>
 <% end %>

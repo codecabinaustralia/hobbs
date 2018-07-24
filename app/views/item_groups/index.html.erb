@@ -28,9 +28,9 @@
       <tr>
         <td><%= item_group.title %></td>
         <td><%= item_group.description %></td>
-        <td><%= link_to 'Show', item_group %></td>
-        <td><%= link_to 'Edit', edit_item_group_path(item_group) %></td>
-        <td><%= link_to 'Destroy', item_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', item_group, class: "button primary" %></td>
+        <td><%= link_to 'Edit', edit_item_group_path(item_group), class: "button warning" %></td>
+        <td><%= link_to 'Destroy', item_group, method: :delete, class: "button alert", data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

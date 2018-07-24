@@ -1,44 +1,105 @@
   <%= nested_form_for @item, local: true, html: { multipart: true, id: "my-form" } do |form| %>
-
+        
+        <div class="grid-x grid-margin-x">
+          <div class="cell small-12 medium-12">
         <%= form.text_field :title,placeholder: "Enter a title for this item" %>
-        <%= form.text_field :item_code, placeholder: "Item code" %>
-        <%= form.file_field :files, direct_upload: true, multiple: true %>
-        <%= form.text_field :description, placeholder: "Enter a description for this item" %>
+          </div>
+        </div>
+        <div class="grid-x grid-margin-x">
+          <div class="cell small-12 medium-12">
+           <%= form.text_field :item_code, placeholder: "Item code" %>
+          </div>
+        </div>
+        <div class="grid-x grid-margin-x">
+          <div class="cell small-12 medium-12">
+            <h3>Upload a logo</h3>
+            <%= form.file_field :logo, direct_upload: true %>
+          </div>
+        </div>
 
-        <%= form.text_field :brand, placeholder: "What brand is this item" %>
+        <div class="grid-x grid-margin-x">
+          <div class="cell small-12 medium-12">
+            <%= form.text_field :description, placeholder: "Enter a description for this item" %>
+          </div>
+        </div>
 
-        <%= form.text_field :cost, placeholder: "eg: 50.00" %> 
-        per
-        <%= form.text_field :unit_label, placeholder: "eg: metre, sq metre, cubic metre" %> 
-        <h3>Select a supplier</h3>
-        <%= form.collection_select(:supplier_id, Supplier.all,
-                  :id, :name,
-                 {:prompt => 'Assign item to a plan'}, class: "submit_select")%>
-        <h3>Select a category</h3>
-        <%= form.collection_select(:category_id, Category.all,
-                  :id, :title,
-                 {:prompt => 'Assign item to a plan'}, class: "submit_select")%>
-        <h3>What group does this belong to (should be multiple)</h3>
-        <%= form.collection_select(:item_group_id, ItemGroup.all,
+        <div class="grid-x grid-margin-x">
+          <div class="cell small-12 medium-12">
+            <%= form.text_field :brand, placeholder: "What brand is this item" %>
+          </div>
+        </div>
+
+        <div class="grid-x grid-margin-x">
+          <div class="cell small-12 medium-5">
+            <%= form.text_field :cost, placeholder: "eg: 50.00" %>     
+          </div>
+          <div class="cell small-12 medium-1">
+            <h3>or</h3>
+          </div>
+          <div class="cell small-12 medium-6">
+            <%= form.text_field :unit_label, placeholder: "eg: metre, sq metre" %>
+          </div>
+        </div>
+
+        <div class="grid-x grid-margin-x">
+          <div class="cell small-12 medium-12">
+                  
+          <h3>Select a supplier</h3>
+          <%= form.collection_select(:supplier_id, Supplier.all,
+                    :id, :name,
+                   {:prompt => 'Select a supplier'}, class: "submit_select")%>
+          </div>
+        </div>
+        
+        <div class="grid-x grid-margin-x">
+          <div class="cell small-12 medium-12">
+            <h3>Select a category</h3>
+            <%= form.collection_select(:category_id, Category.all,
                       :id, :title,
-                     {:prompt => 'Categorise this item'}, class: "submit_select")%>
+                     {:prompt => 'Select a category'}, class: "submit_select")%>
+          </div>
+        </div>
+
+        <div class="grid-x grid-margin-x">
+          <div class="cell small-12 medium-12">
+
+            <h3>What group does this belong to (should be multiple)</h3>
+            <%= form.collection_select(:item_group_id, ItemGroup.all,
+                          :id, :title,
+                         {:prompt => 'Categorise this item'}, class: "submit_select")%>
+
+            </div>
+          </div>
+
         <div style="padding: 20px; background-color: #f5f5f5; border: 2px solid #e5e5e5;">
 
-        <h2>Attributes</h2>
-        <%= form.fields_for :item_attributes do |attribute| %>
-        <label for="title">Title</label>
-          <%= attribute.text_field :title %>
-          <label for="title">Item Code</label>
-          <%= attribute.text_field :item_code %>
-          <%= form.label :images %>
-          <%= form.file_field :images, direct_upload: true %>
-          <%= attribute.link_to_remove "Remove this attribute" %>
-        <% end %>
-        <p><%= form.link_to_add "Add a attribute", :item_attributes %></p>
+        <h3>Does this item have any attributes?</h3>
+        <p class="lead">An attribute is an option for example, an item of paint may have attributes: White, Blue, Green etc</p>
+        
+          
+          <%= form.fields_for :item_attributes do |attribute| %>
+          <div class="grid-x grid-margin-x" style="margin-bottom: 40px; border: 4px dashed #aaa; padding: 20px;">
+            <div class="cell small-12">
+            <%= attribute.text_field :title, placeholder: "Atribute title" %>
+            </div>
+            <div class="cell small-12">
+            <%= attribute.text_field :item_code, placeholder: "item code?" %>
+            </div>
+            <div class="cell small-12">
+            <%= form.file_field :image, direct_upload: true %>
+            </div>
+            <div class="cell small-12 text-right">
+              <%= attribute.link_to_remove "REMOVE THIS ATTRIBUTE", class: "button alert", style: "color: #fff; font-weight: 700;" %>
+            </div>
+          </div>
+          <% end %>
+          <div class="cell small-6">
+          <%= form.link_to_add "ADD AN ATTRIBUTE", :item_attributes, class: "button success", style: "color: #fff; font-weight: 700;" %>
+          </div>
         </div>
 
       
-      <%= form.submit "Submit", class: "button success" %>
+      <%= form.submit "Submit Item", class: "button success expanded large" %>
 
   <% end %>
 

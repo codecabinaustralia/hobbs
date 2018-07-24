@@ -19,7 +19,11 @@
             </div>
             <div class="cell small-2 text-left">
               <div class="my-msg-avatar">
-                <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg">
+                <% if post.user.avatar.attached? %>
+                    <%= image_tag post.user.avatar, :size => "100x100", :crop => :fill %>
+                <% else %>
+                <img src="https://s3-us-west-2.amazonaws.com/hobbs-building/assets/avatar.png" alt="avatar" width="100">
+                <% end %>
               </div>
             </div>
 
@@ -35,9 +39,11 @@
         <% else %>
 
             <div class="cell small-2 text-right">
-              <div class="your-msg-avatar">
-                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg">
-              </div>
+              <% if post.user.avatar.attached? %>
+                <%= image_tag post.user.avatar, :size => "100x100", :crop => :fill %>
+              <% else %>
+              <img src="https://s3-us-west-2.amazonaws.com/hobbs-building/assets/avatar.png" alt="avatar" width="100">
+              <% end %>
             </div>
             <div class="cell small-10  your-msg">
               <%= post.content %><br />

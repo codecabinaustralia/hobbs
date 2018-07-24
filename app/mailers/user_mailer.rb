@@ -20,13 +20,13 @@ class UserMailer < ApplicationMailer
     mail to: @owner.email, subject: "#{@project.title} Stage 1 Complete"
   end
 
-  def variation_request(user, variation, client, project)
+  def variation_request(owner, variation, client, project)
     @client = client
     @project = project
-    @user = user
+    @owner = owner
     @variation = variation
 
-    mail to: @user.email, subject: "#{@project.title} Variation Request"
+    mail to: @owner.email, subject: "#{@project.title} Variation Request"
   end
 
   def items_added(owner, project)

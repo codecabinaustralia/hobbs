@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_23_053344) do
+ActiveRecord::Schema.define(version: 2018_07_24_203620) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 2018_07_23_053344) do
     t.integer "zone_id"
     t.integer "zone_item_group_id"
     t.integer "item_attribute_id"
+    t.boolean "variation_requested"
     t.index ["category_id"], name: "index_project_items_on_category_id"
     t.index ["item_attribute_id"], name: "index_project_items_on_item_attribute_id"
     t.index ["item_group_id"], name: "index_project_items_on_item_group_id"

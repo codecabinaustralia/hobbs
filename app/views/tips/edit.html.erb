@@ -1,6 +1,12 @@
-<h1>Editing Tip</h1>
-
-<%= render 'form', tip: @tip %>
-
-<%= link_to 'Show', @tip %> |
-<%= link_to 'Back', tips_path %>
+<div class="grey-background-form">
+	<div class="grid-container">
+		<div class="grid-x">
+		 	<div class="cell small-12 medium-6 medium-offset-3">
+		 		<div class="inner-container">
+				<h1>Edit Tip</h1>
+				<%= render 'form', tip: @tip %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

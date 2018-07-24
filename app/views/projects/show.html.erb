@@ -10,8 +10,13 @@
       </div>
     </div>
       <%= render 'projects/secondary_header', project: @project %>
-  
-  <%= render 'projects/quote_table', project_items: @project_items %>
+      <div class="grid-x project-container">
+        <div class="small-12">
+          <%= render 'projects/project_clients' %>
+          <%= render 'projects/quote_table', project_items: @project_items %>
+        </div>
+      </div>
+      
   
 <% else %>
   <div style="background-color: #39ba82; padding: 20px; color: #fff;">
